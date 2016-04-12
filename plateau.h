@@ -25,9 +25,9 @@ bool plateau_case_vide(Plateau p, Coordonnee coord);
  * \brief Place un pion sur le plateau
  * \param *p Le plateau de jeu sur lequel placer le pion
  * \param pion Le pion à placer
- * \return true si le pion a été placé, false sinon
+ * \return 1 si le pion a été placé, 2 si coup gagnant, 0 sinon
  */
-bool plateau_placer_pion(Plateau* p, Pion pion);
+int plateau_placer_pion(Plateau* p, Pion pion);
 
 /**
  * \brief Renvoie le pion d'une case d'un plateau

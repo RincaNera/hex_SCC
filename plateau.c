@@ -19,13 +19,13 @@ bool plateau_case_vide(Plateau p, Coordonnee coord) {
     return p->tab[coord_get_x(coord)][coord_get_y(coord)] == NULL;
 }
 
-bool plateau_placer_pion(Plateau* p, Pion pion) {
+int plateau_placer_pion(Plateau* p, Pion pion) {
     Coordonnee coord = pion_get_coord(pion);
     if (!plateau_case_vide(*p,coord)) {
         (*p)->tab[coord_get_x(coord)][coord_get_y(coord)] = pion;
-        return true;
+        return 1;
     }
-    return false;
+    return 0;
 }
 
 Pion plateau_get_pion(Plateau p, Coordonnee coord) {
