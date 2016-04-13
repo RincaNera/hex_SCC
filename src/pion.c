@@ -21,6 +21,12 @@ Pion pion_set(Pion p, Coordonnee coord, int couleur) {
     return p;
 }
 
+Pion pion_set2(Pion p, unsigned int x, unsigned int y, int couleur) {
+    p = pion_set_couleur(p, couleur);
+    p = pion_set_coord2(p, x, y);
+    return p;
+}
+
 Pion pion_set_couleur(Pion p, int c) {
     if (c == ROUGE || c == BLEU)
         p->couleur = c;
@@ -32,7 +38,14 @@ int pion_get_couleur(Pion p) {
 }
 
 Pion pion_set_coord(Pion p, Coordonnee coord) {
+    free(p->coord);
     p->coord = coord;
+    return p;
+}
+
+Pion pion_set_coord2(Pion p, unsigned int x, unsigned int y) {
+    p->coord = coord_set_x(p->coord, x);
+    p->coord = coord_set_y(p->coord, y);
     return p;
 }
 

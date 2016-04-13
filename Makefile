@@ -1,5 +1,5 @@
 CC  = gcc
-SYS = -Wall -pedantic -std=c99
+SYS = -g -Wall -std=c99
 INC = -I.
 
 EXEC = hex
@@ -7,20 +7,15 @@ EXEC = hex
 SRCDIR = src
 BINDIR = bin
 OBJDIR = obj
-FILESDIR = fichiers
 
 OBJ_JEU   = jeu.o
 OBJ_COORD = coordonnee.o
 OBJ_PION  = pion.o
 OBJ_PLAT  = plateau.o
 OBJ_SAVE  = sauvegarde.o
-OBJ_MAIN = main.o
 
-OBJ_COMMON = $(OBJ_JEU) $(OBJ_COORD) $(OBJ_PION) $(OBJ_PLAT) $(OBJ_SAVE) $(OBJ_MAIN)
+OBJ_COMMON = $(OBJ_JEU) $(OBJ_COORD) $(OBJ_PION) $(OBJ_PLAT) $(OBJ_SAVE)
 
-
-# Mode NC, pas de controle de flux, ni reprise sur erreurs
-# ---------------------------------------------------------
 all: $(OBJ_COMMON)
 	$(CC) -o $(BINDIR)/$(EXEC) $(OBJ_COMMON)
 	mv *.o $(OBJDIR)/
@@ -34,6 +29,5 @@ all: $(OBJ_COMMON)
 clean:
 	rm -f *.o
 	rm -f $(OBJDIR)/*.o
-	rm -f $(BINDIR)/* $(FILESDIR)/out.*
 	
 

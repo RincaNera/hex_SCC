@@ -19,6 +19,11 @@ bool plateau_case_vide(Plateau p, Coordonnee coord) {
     return p->tab[coord_get_x(coord)][coord_get_y(coord)] == NULL;
 }
 
+bool plateau_case_vide2(Plateau p, unsigned int x, unsigned int y) {
+    assert(x < 11 && y < 11);
+    return p->tab[x][y] == NULL;
+}
+
 bool coup_gagnant(Plateau p, Pion pion) {
     return true;
 }
@@ -35,4 +40,9 @@ int plateau_placer_pion(Plateau* p, Pion pion) {
 
 Pion plateau_get_pion(Plateau p, Coordonnee coord) {
     return p->tab[coord_get_x(coord)][coord_get_y(coord)];
+}
+
+Pion plateau_get_pion2(Plateau p, unsigned int x, unsigned int y) {
+    assert(x < 11 && y < 11);
+    return p->tab[x][y];
 }
