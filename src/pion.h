@@ -3,8 +3,8 @@
 
 #include "coordonnee.h"
 
-#define ROUGE 0
-#define BLEU 1
+#define ROUGE 1
+#define BLEU 2
 
 typedef struct pion_s* Pion;
 

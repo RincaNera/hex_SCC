@@ -5,6 +5,8 @@
 #include "pion.h"
 #include "coordonnee.h"
 
+#define TAILLE 11
+
 typedef struct plateau_s* Plateau;
 
 /**

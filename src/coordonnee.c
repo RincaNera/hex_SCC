@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <assert.h>
 #include "coordonnee.h"
 
 struct coordonnee_s {
@@ -8,6 +9,7 @@ struct coordonnee_s {
 
 Coordonnee coord_init() {
     Coordonnee coord = (Coordonnee)malloc(sizeof(struct coordonnee_s));
+    assert(coord != NULL);
     coord->x = 0;
     coord->y = 0;
     return coord;
