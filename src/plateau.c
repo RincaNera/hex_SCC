@@ -31,7 +31,7 @@ bool coup_gagnant(Plateau p, Pion pion) {
 // TODO: vérifier coup gagnant
 int plateau_placer_pion(Plateau* p, Pion pion) {
     Coordonnee coord = pion_get_coord(pion);
-    if (!plateau_case_vide(*p,coord)) {
+    if (plateau_case_vide(*p,coord)) {
         (*p)->tab[coord_get_x(coord)][coord_get_y(coord)] = pion;
         return 1;
     }

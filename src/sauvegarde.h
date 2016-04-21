@@ -3,13 +3,7 @@
 
 #include "plateau.h"
 
-typedef struct save_s* Save;
-
-Save save_init();
-
-Save save_set(Save s, Plateau p, bool tour);
-
-bool save_sauvegarder(Save s, char* fichier);
+bool save_sauvegarder(Plateau p, bool tourJ1, char* fichier);
 
 bool save_charger(Plateau* p, bool* tour, char* fichier);
 

@@ -16,6 +16,7 @@ Pion pion_init() {
 }
 
 Pion pion_set(Pion p, Coordonnee coord, int couleur) {
+    assert(couleur == ROUGE || couleur == BLEU);
     p = pion_set_couleur(p, couleur);
     p = pion_set_coord(p, coord);
     return p;
