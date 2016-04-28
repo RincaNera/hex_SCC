@@ -5,13 +5,15 @@
 bool save_sauvegarder(Plateau p, bool tourJ1, char *fichier) {
     FILE* file = NULL;
     if ((file = fopen(fichier, "w")) != NULL) {
-        Coordonnee coord = coord_init();
+        Coordonnee coord;
+        Pion pion;
         for (unsigned int i = 0; i < TAILLE; i++) {
-            coord = coord_set_y(coord, i);
             for (unsigned int j = 0; j < TAILLE; j++) {
+                coord = coord_init();
+                coord = coord_set_y(coord, i);
                 coord = coord_set_x(coord, j);
-                Pion pion = plateau_get_pion(p, coord);
-                if (p == NULL)
+                pion = plateau_get_pion(p, coord);
+                if (pion == NULL)
                     fprintf(file, "%d", 0);
                 else {
                     if (pion_get_couleur(pion) == ROUGE)
