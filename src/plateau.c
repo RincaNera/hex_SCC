@@ -8,7 +8,7 @@ struct plateau_s {
 };
 
 Plateau plateau_init() {
-    Plateau p = (Plateau)malloc(sizeof(struct plateau_s));
+    Plateau p = (Plateau) malloc(sizeof(struct plateau_s));
     assert(p != NULL);
     for (int i = 0; i < TAILLE; i++)
         for (int j = 0; j < TAILLE; j++)
@@ -36,17 +36,17 @@ DynTab voisin(Plateau p, Pion pion, DynTab dt) {
     Coordonnee c = pion_get_coord(pion);
     int x = coord_get_x(c), y = coord_get_y(c);
     Pion p_;
-    if ((p_ = plateau_get_pion_v(p, x-1, y)) != NULL)
+    if ((p_ = plateau_get_pion_v(p, x - 1, y)) != NULL)if (pion_get_couleur(p) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x-1, y-1)) != NULL)
+    if ((p_ = plateau_get_pion_v(p, x - 1, y - 1)) != NULL) if (pion_get_couleur(p) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x, y-1)) != NULL)
+    if ((p_ = plateau_get_pion_v(p, x, y - 1)) != NULL) if (pion_get_couleur(p) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x, y+1)) != NULL)
+    if ((p_ = plateau_get_pion_v(p, x, y + 1)) != NULL) if (pion_get_couleur(p) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x+1, y+1)) != NULL)
+    if ((p_ = plateau_get_pion_v(p, x + 1, y + 1)) != NULL) if (pion_get_couleur(p) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x+1, y)) != NULL)
+    if ((p_ = plateau_get_pion_v(p, x + 1, y)) != NULL) if (pion_get_couleur(p) == pion_get_couleur(p_))
         tab_add(dt, p_);
     return dt;
 }
@@ -78,9 +78,9 @@ bool coup_gagnant(Plateau p, Pion pion) {
     return (debut && fin);
 }
 
-int plateau_placer_pion(Plateau* p, Pion pion) {
+int plateau_placer_pion(Plateau *p, Pion pion) {
     Coordonnee coord = pion_get_coord(pion);
-    if (plateau_case_vide(*p,coord)) {
+    if (plateau_case_vide(*p, coord)) {
         (*p)->tab[coord_get_y(coord)][coord_get_x(coord)] = pion;
         if (coup_gagnant(*p, pion))
             return 2;
