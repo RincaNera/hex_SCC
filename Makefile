@@ -13,8 +13,9 @@ OBJ_COORD = coordonnee.o
 OBJ_PION  = pion.o
 OBJ_PLAT  = plateau.o
 OBJ_SAVE  = sauvegarde.o
+OBJ_TAB   = tableau.o
 
-OBJ_COMMON = $(OBJ_JEU) $(OBJ_COORD) $(OBJ_PION) $(OBJ_PLAT) $(OBJ_SAVE)
+OBJ_COMMON = $(OBJ_JEU) $(OBJ_COORD) $(OBJ_PION) $(OBJ_PLAT) $(OBJ_SAVE) $(OBJ_TAB)
 
 all: $(OBJ_COMMON)
 	$(CC) -o $(BINDIR)/$(EXEC) $(OBJ_COMMON)

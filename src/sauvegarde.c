@@ -7,9 +7,9 @@ bool save_sauvegarder(Plateau p, bool tourJ1, char *fichier) {
     if ((file = fopen(fichier, "w")) != NULL) {
         Coordonnee coord = coord_init();
         for (unsigned int i = 0; i < TAILLE; i++) {
-            coord = coord_set_x(coord, i);
+            coord = coord_set_y(coord, i);
             for (unsigned int j = 0; j < TAILLE; j++) {
-                coord = coord_set_y(coord, j);
+                coord = coord_set_x(coord, j);
                 Pion pion = plateau_get_pion(p, coord);
                 if (p == NULL)
                     fprintf(file, "%d", 0);
@@ -36,13 +36,15 @@ bool save_sauvegarder(Plateau p, bool tourJ1, char *fichier) {
 bool save_charger(Plateau* p, bool* tour, char *fichier) {
     FILE* file = NULL;
     char c;
+    Coordonnee coord = NULL;
+    Pion pion = NULL;
     if ((file = fopen(fichier, "r")) != NULL) {
-        Coordonnee coord = coord_init();
         for (unsigned int i = 0; i < TAILLE; i++) {
-            coord = coord_set_x(coord, i);
             for (unsigned int j = 0; j < TAILLE; j++) {
-                coord = coord_set_y(coord, j);
-                Pion pion = pion_init();
+                coord = coord_init();
+                coord = coord_set_y(coord, i);
+                coord = coord_set_x(coord, j);
+                pion = pion_init();
                 fscanf(file, "%c", &c);
                 if (c-48 != 0) {
                     pion = pion_set(pion, coord, (int)c-48);
