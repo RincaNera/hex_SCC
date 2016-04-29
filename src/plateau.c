@@ -36,17 +36,17 @@ DynTab voisin(Plateau p, Pion pion, DynTab dt) {
     Coordonnee c = pion_get_coord(pion);
     int x = coord_get_x(c), y = coord_get_y(c);
     Pion p_;
-    if ((p_ = plateau_get_pion_v(p, x - 1, y)) != NULL)if (pion_get_couleur(p) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_v(p, x - 1, y)) != NULL)if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x - 1, y - 1)) != NULL) if (pion_get_couleur(p) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_v(p, x - 1, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x, y - 1)) != NULL) if (pion_get_couleur(p) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_v(p, x, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x, y + 1)) != NULL) if (pion_get_couleur(p) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_v(p, x, y + 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x + 1, y + 1)) != NULL) if (pion_get_couleur(p) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_v(p, x + 1, y + 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x + 1, y)) != NULL) if (pion_get_couleur(p) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_v(p, x + 1, y)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
     return dt;
 }
