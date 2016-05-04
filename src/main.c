@@ -133,12 +133,15 @@ int main( int argc, char *argv[ ] )
 {
 	#define HEXPOS_X 270
 	#define HEXPOS_Y 100
-	#define FONT_NAME "open-sans/OpenSans-Light.ttf"
+	#define FONT_NAME "./files/OpenSans-Light.ttf"
 	#define FONT_SIZE 43
     #define FPS 60
-    #define HEXFILE_BMP "Saves/Hex_updated.bmp"
-    #define BACKGROUND_GAME 255,255,255
-
+	#define BACKGROUND_GAME 255,255,255
+	#define HEXFILE_PNG "./files/hex_inverse.png"
+    #define HEXFILE_BMP "./files/hex_updated.bmp"
+	#define REDPAWN_PNG "./files/button-red22.png"
+	#define BLUEPAWN_PNG "./files/button-blue22.png"
+	
 	Uint32 time;
     SDL_Surface *screen = NULL;
     SDL_Surface *hexBoard = NULL;
@@ -172,12 +175,12 @@ int main( int argc, char *argv[ ] )
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND_GAME));
 
     /* Application de l'image HEX */
-    hexBoard = IMG_Load("Images/hex_inverse.png");
+    hexBoard = IMG_Load(HEXFILE_PNG);
     apply_surface(HEXPOS_X,HEXPOS_Y,hexBoard,screen);
 
     /* Chargement des images de pions */
-    bluePawn = load_image("Images/button-blue22.png");
-    redPawn = load_image("Images/button-red22.png");
+    bluePawn = load_image(BLUEPAWN_PNG);
+    redPawn = load_image(REDPAWN_PNG);
 
     SDL_Flip(screen);
 
@@ -195,7 +198,7 @@ int main( int argc, char *argv[ ] )
                     {
                         int mouseX = event.motion.x;
                         int mouseY = event.motion.y;
-                        printf("X=%d Y=%d\n",mouseX,mouseY); // on r�cup�re les coordonn�es du clic
+                        printf("X=%d Y=%d\n",mouseX,mouseY); // on recupere les coordonnees du clic
                     }
                     break;
 
