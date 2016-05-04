@@ -1,41 +1,56 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
-#include "SDL/SDL.h"
 #include "SDL/SDL_ttf.h"
-#include "SDL/SDL_image.h"
 #include "initialisation.h"
 #include "image.h"
 #include "menuItem.h"
 
+/** \brief Render de la 1ère page d'affichage le menu
+ *
+ * \param SDL_Surface* screen La surface SDL sur lequel afficher le menu
+ * \param TTF_Font * font La police d'écriture désiré
+ * \return int Un entier allant de 0 à NMENU qui retourne l'élement selectionné
+ *
+ */
 int drawMenu(SDL_Surface *screen, TTF_Font *font)
 {
-    int x, y;
-    #define NMENU 2
-    #define PLAY 0
-    #define QUIT 1
 
-    SDL_Color color[NMENU] = { {255,255,255}, {0,255,0} };
+	Uint32 time; /* Permet de réguler le temps d'affichage d'une image */
+    int x, y; /* Position enregistré du curseur */
+    #define NMENU 2 /* Nombre de menuItem */
+    #define PLAY 0 /* Passe à l'écran de jeu */
+    #define QUIT 1 /* Demande de fermeture du jeu */
+    #define BACKGROUND 0,188,255 /* Couleur du fond d'écran */
+    #define TEXT_SELECTED 255,255,255 /* Couleur du texte lorsqu'il est selectionné */
+    #define TEXT_N_SELECTED 0,0,0 /* Couleur du texte lorsqu'il n'est pas selectionné */
 
+	/* Définition des couleurs d'affichage du texte non sélectionné et séléctionné */
+    SDL_Color color[NMENU] = { {TEXT_SELECTED}, {TEXT_N_SELECTED} };
+
+	/* Définition de l'élement "Jouer" */
     menuItem play = mnit_init();
     play = mnit_set_name(play, "Jouer");
     mnit_set_surface(play, TTF_RenderText_Blended(font,mnit_get_name(play),color[0]));
     mnit_get_position(play)->x = screen->clip_rect.w/2 - mnit_get_surface(play)->clip_rect.w/2;
     mnit_get_position(play)->y = screen->clip_rect.h/2 - mnit_get_surface(play)->clip_rect.h;
 
+	/* Définition de l'élement "Quitter" */
     menuItem quit = mnit_init();
     mnit_set_name(quit, "Quitter");
     mnit_set_surface(quit, TTF_RenderText_Blended(font,mnit_get_name(quit),color[0]));
     mnit_get_position(quit)->x = screen->clip_rect.w/2 - mnit_get_surface(quit)->clip_rect.w/2;
     mnit_get_position(quit)->y = screen->clip_rect.h/2 + mnit_get_surface(quit)->clip_rect.h;
 
-    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,191,255));
+	/* Mise en place du fond d'écran propre au Menu*/
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND));
 
     menuItem menu[NMENU] = {play,quit};
     SDL_Event event;
     int running = true;
     while (running)
     {
+		time = SDL_GetTicks();
         while(SDL_PollEvent(&event))
         {
             switch (event.type)
@@ -45,31 +60,35 @@ int drawMenu(SDL_Surface *screen, TTF_Font *font)
                     y = event.motion.y;
                     for(int i = 0; i < NMENU; ++i)
                     {
+						/* Si l'élément est sélectionné il est supprimé puis réécrit en surbrillance*/
                         if(x >= mnit_get_position(menu[i])->x && x <= mnit_get_position(menu[i])->x + mnit_get_position(menu[i])->w && y >= mnit_get_position(menu[i])->y && y <= mnit_get_position(menu[i])->y + mnit_get_position(menu[i])->h)
                         {
                             if(!mnit_get_selected(menu[i]))
                             {
                                 mnit_set_selected(menu[i], true);
                                 SDL_FreeSurface(mnit_get_surface(menu[i]));
-                                mnit_set_surface(menu[i], TTF_RenderText_Solid(font,mnit_get_name(menu[i]),color[1]));
+                                mnit_set_surface(menu[i], TTF_RenderText_Blended(font,mnit_get_name(menu[i]),color[1]));
                             }
                         }
+						/* Cas où l'élément a été mis en surbrillance mais n'est plus sélectionné*/
                         else
                         {
                             if(mnit_get_selected(menu[i]))
                             {
                                 mnit_set_selected(menu[i], false);
                                 SDL_FreeSurface(mnit_get_surface(menu[i]));
-                                mnit_set_surface(menu[i], TTF_RenderText_Solid(font,mnit_get_name(menu[i]),color[1]));
+                                mnit_set_surface(menu[i], TTF_RenderText_Blended(font,mnit_get_name(menu[i]),color[0]));
                             }
                         }
                     }
                     break;
+
                 case SDL_MOUSEBUTTONDOWN:
                     x = event.button.x;
                     y = event.button.y;
                     for(int i = 0; i < NMENU; ++i)
                     {
+						/* Retourne l'indice de l'élément sélectionné */
                         if(x >= mnit_get_position(menu[i])->x && x <= mnit_get_position(menu[i])->x + mnit_get_position(menu[i])->w && y >= mnit_get_position(menu[i])->y && y <= mnit_get_position(menu[i])->y + mnit_get_position(menu[i])->h)
                         {
                             for (int j = 0; j < NMENU; ++j)
@@ -78,33 +97,56 @@ int drawMenu(SDL_Surface *screen, TTF_Font *font)
                         }
                     }
                     break;
+
                 case SDL_KEYDOWN:
+					/* Ferme l'écran du menu */
                     if(event.key.keysym.sym == SDLK_ESCAPE)
                     {
                         for (int j = 0; j < NMENU; ++j)
                             SDL_FreeSurface(mnit_get_surface(menu[j]));
-                        return 0;
+                        return QUIT;
                     }
+					break;
+
                 case SDL_QUIT:
                     for(int i = 0; i < NMENU; ++i)
                         mnit_destroy(menu[i]);
-                    return 1;
+                    return QUIT;
             }
         }
+
+		/* Affichage des surfaces mises à jour */
         for(int i = 0; i < NMENU; ++i)
             SDL_BlitSurface(mnit_get_surface(menu[i]),NULL,screen, mnit_get_position(menu[i]));
         SDL_Flip(screen);
+
+		if(1000/30 > (SDL_GetTicks()-time))
+                        SDL_Delay(1000/30 - (SDL_GetTicks()-time));
     }
-    return -1;
+    for(int i = 0; i < NMENU; ++i)
+        mnit_destroy (menu[i]);
+    return -1; /* Cas d'erreur */
 }
 
 
 int main( int argc, char *argv[ ] )
 {
+	#define HEXPOS_X 270
+	#define HEXPOS_Y 100
+	#define FONT_NAME "./files/OpenSans-Light.ttf"
+	#define FONT_SIZE 43
+    #define FPS 60
+    #define HEXFILE_BMP "./files/saves/Hex_updated.bmp"
+    #define BACKGROUND 255,255,255
+
+	Uint32 time;
     SDL_Surface *screen = NULL;
-    SDL_Rect hexBoard;
-    hexBoard.x = 270;
-    hexBoard.y = 100;
+    SDL_Surface *hexBoard = NULL;
+    SDL_Surface *bluePawn = NULL;
+    SDL_Surface *redPawn = NULL;
+	TTF_Font *font;
+	int running;
+	int i;
 
     if (initialize_screen(&screen) == 0)
     {
@@ -118,22 +160,32 @@ int main( int argc, char *argv[ ] )
         exit(2);
     }
 
-    int running = true;
-    TTF_Font *font;
-    font = TTF_OpenFont("CAC-Champagne/cac_champagne.ttf",30);
-    int i = drawMenu(screen, font);
+    font = TTF_OpenFont(FONT_NAME,FONT_SIZE);
+    running = true;
+    i = drawMenu(screen, font);
     if(i==1)
     {
         running = false;
     }
 
-    // Fond d'�cran du jeu 0,191,255
+    /* Fond de l'écran de jeu */
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND));
+
+    /* Application de l'image HEX */
+    hexBoard = IMG_Load("Images/hex_inverse.png");
+    apply_surface(HEXPOS_X,HEXPOS_Y,hexBoard,screen);
+
+    /* Chargement des images de pions */
+    bluePawn = load_image("Images/button-blue22.png");
+    redPawn = load_image("Images/button-red22.png");
 
     SDL_Flip(screen);
 
+    /* Mise à jour de l'écran */
     SDL_Event event;
     while (running)
     {
+        time = SDL_GetTicks();
         while ( SDL_PollEvent(&event))
         {
             switch (event.type)
@@ -150,9 +202,15 @@ int main( int argc, char *argv[ ] )
                 case SDL_KEYDOWN:
                     if(event.key.keysym.sym == SDLK_ESCAPE)
                     {
+                        SDL_LockSurface(screen);
+                        SDL_SaveBMP(screen,HEXFILE_BMP);
+                        SDL_UnlockSurface(screen);
                         i = drawMenu(screen, font);
                         if(i==1)
                             running = false;
+                        hexBoard = load_image(HEXFILE_BMP);
+                        apply_surface(0,0,hexBoard,screen);
+                        SDL_Flip(screen);
                     }
                     break;
 
@@ -161,16 +219,17 @@ int main( int argc, char *argv[ ] )
                     break;
             }
         }
-        // refresh screen
-        // mettre ici tous les blit utiles s'il y a des changements dans les surfaces, board, nouveaux pions
-        SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0,191,255));
-        SDL_Surface *hex = IMG_Load("Images/hex.png");
 
-        apply_surface(hexBoard.x,hexBoard.y,hex,screen);
-        SDL_Flip(screen); //maj des surfaces pour affichage
+        SDL_Flip(screen);
+        if(1000/FPS > (SDL_GetTicks()-time))
+            SDL_Delay(1000/FPS-(SDL_GetTicks()-time));
     }
 
     //Quit SDL
+    SDL_FreeSurface(screen);
+    SDL_FreeSurface(hexBoard);
+    SDL_FreeSurface(bluePawn);
+    SDL_FreeSurface(redPawn);
     TTF_CloseFont(font);
     TTF_Quit();
     SDL_Quit();
