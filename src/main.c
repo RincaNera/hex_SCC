@@ -21,7 +21,7 @@ int drawMenu(SDL_Surface *screen, TTF_Font *font)
     #define NMENU 2 /* Nombre de menuItem */
     #define PLAY 0 /* Passe à l'écran de jeu */
     #define QUIT 1 /* Demande de fermeture du jeu */
-    #define BACKGROUND 0,188,255 /* Couleur du fond d'écran */
+    #define BACKGROUND_MENU 0,188,255 /* Couleur du fond d'écran */
     #define TEXT_SELECTED 255,255,255 /* Couleur du texte lorsqu'il est selectionné */
     #define TEXT_N_SELECTED 0,0,0 /* Couleur du texte lorsqu'il n'est pas selectionné */
 
@@ -43,7 +43,7 @@ int drawMenu(SDL_Surface *screen, TTF_Font *font)
     mnit_get_position(quit)->y = screen->clip_rect.h/2 + mnit_get_surface(quit)->clip_rect.h;
 
 	/* Mise en place du fond d'écran propre au Menu*/
-    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND));
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND_MENU));
 
     menuItem menu[NMENU] = {play,quit};
     SDL_Event event;
@@ -133,11 +133,11 @@ int main( int argc, char *argv[ ] )
 {
 	#define HEXPOS_X 270
 	#define HEXPOS_Y 100
-	#define FONT_NAME "./files/OpenSans-Light.ttf"
+	#define FONT_NAME "open-sans/OpenSans-Light.ttf"
 	#define FONT_SIZE 43
     #define FPS 60
-    #define HEXFILE_BMP "./files/saves/Hex_updated.bmp"
-    #define BACKGROUND 255,255,255
+    #define HEXFILE_BMP "Saves/Hex_updated.bmp"
+    #define BACKGROUND_GAME 255,255,255
 
 	Uint32 time;
     SDL_Surface *screen = NULL;
@@ -169,7 +169,7 @@ int main( int argc, char *argv[ ] )
     }
 
     /* Fond de l'écran de jeu */
-    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND));
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND_GAME));
 
     /* Application de l'image HEX */
     hexBoard = IMG_Load("Images/hex_inverse.png");
