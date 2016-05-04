@@ -6,7 +6,9 @@ struct menuItem_s {
     SDL_Surface *menuScreen;
     SDL_Rect *position;
     bool selected;
-};
+};typedef struct menuItem_s* menuItem;
+
+
 
 menuItem mnit_init() {
     menuItem mn = (menuItem)malloc(sizeof(struct menuItem_s));
@@ -15,6 +17,10 @@ menuItem mnit_init() {
     mn->menuScreen = NULL;
     mn->position = (SDL_Rect*)malloc(sizeof(SDL_Rect));
     assert(mn->position != NULL);
+	mn->position->x = 0;
+	mn->position->y = 0;
+	mn->position->h = 0;
+	mn->position->w = 0;
     mn->selected = false;
     return mn;
 }
