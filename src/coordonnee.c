@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "coordonnee.h"
+#include <stdio.h>
 
 struct coordonnee_s {
     unsigned int x;
@@ -39,4 +40,23 @@ unsigned int coord_get_x(Coordonnee coord) {
 
 unsigned int coord_get_y(Coordonnee coord) {
     return coord->y;
+}
+
+int pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsigned int h, unsigned int s){
+    #define OFFSET_X 295
+    #define OFFSET_Y 118
+    #define HEX_TILE_NUMBER 11
+
+    int col, lig, shift, roundX, roundY, rectType;
+
+    col = (int) ( (x - OFFSET_X) / (2 * r) );
+    lig = (int) ( (y - OFFSET_Y) / (h + s) );
+
+    roundX = (x - OFFSET_X) - col * (2 * r);
+    roundY = (y - OFFSET_Y) - lig * (h + s);
+
+    printf("TempX = %u \nTempY = %u", roundX,roundY);
+    printf("\nLigne = %d \nColonne = %d\n",lig,col);
+
+    return (1);
 }

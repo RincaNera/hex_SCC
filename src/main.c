@@ -5,6 +5,9 @@
 #include "initialisation.h"
 #include "image.h"
 #include "menuItem.h"
+#include "coordonnee.h"
+
+
 
 /** \brief Render de la 1ère page d'affichage le menu
  *
@@ -47,6 +50,7 @@ int drawMenu(SDL_Surface *screen, TTF_Font *font)
 
     menuItem menu[NMENU] = {play,quit};
     SDL_Event event;
+
     int running = true;
     while (running)
     {
@@ -138,10 +142,10 @@ int main( int argc, char *argv[ ] )
     #define FPS 60
 	#define BACKGROUND_GAME 255,255,255
 	#define HEXFILE_PNG "./files/hex_inverse.png"
-    #define HEXFILE_BMP "./files/hex_updated.bmp"
+    #define HEXFILE_BMP "./files/saves/hex_updated.bmp"
 	#define REDPAWN_PNG "./files/button-red22.png"
 	#define BLUEPAWN_PNG "./files/button-blue22.png"
-	
+
 	Uint32 time;
     SDL_Surface *screen = NULL;
     SDL_Surface *hexBoard = NULL;
@@ -150,6 +154,9 @@ int main( int argc, char *argv[ ] )
 	TTF_Font *font;
 	int running;
 	int i;
+    int test;
+
+
 
     if (initialize_screen(&screen) == 0)
     {
@@ -199,6 +206,8 @@ int main( int argc, char *argv[ ] )
                         int mouseX = event.motion.x;
                         int mouseY = event.motion.y;
                         printf("X=%d Y=%d\n",mouseX,mouseY); // on recupere les coordonnees du clic
+                        test = pixel_to_rect(mouseX,mouseY,15,7,18);
+                        printf("Test : %d",test);
                     }
                     break;
 
