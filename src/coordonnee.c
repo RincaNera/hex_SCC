@@ -42,41 +42,69 @@ unsigned int coord_get_y(Coordonnee coord) {
     return coord->y;
 }
 
-int pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsigned int h, unsigned int s){
-    #define HEX_TILE_NUMBER 11
-    #define OFFSET_X 295
-    #define OFFSET_Y 118
-    #define RECT_TYPE_A 0
-    #define RECT_TYPE_B 1
+Coordonnee pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsigned int h, unsigned int s){
+    #define HEX_TILE_NUMBER 11 /* Nombre de case en largeur / longueur */
+    #define RECT_TILE_NUMBER HEX_TILE_NUMBER + (HEX_TILE_NUMBER / 2)
+    #define OFFSET_X 295 /* Position du point x par rapport à la grille */
+    #define OFFSET_Y 118 /* Position du point y par rapport à la grille */
+    #define RECT_TYPE_A 0 /* Rectangle de type "Maison" */
+    #define RECT_TYPE_B 1 /* Rectangle de type Y (i grec)*/
 
-    int col, lig, roundX, roundY, rectType;
-    float m;
+    Coordonnee hexagone; /* Coordonnées de l'hexagone sélectionné */
+    unsigned int col, line, rectType; /* Colonne, linene correspondant à un rectangle et son type */
+    int roundX, roundY; /* Points X, Y centré sur le point 0.0 du rectangle */
+    float m; /* Coefficient directeur */
+    int lowerLimitX, upperLimitX; /* Borne inférieure et supérieure de la grille en pixel */
+
+    hexagone = coord_init();
 
     col = (int) ( (x - OFFSET_X) / (2 * r) );
-    lig = (int) ( (y - OFFSET_Y) / (h + s) );
+    line = (int) ( (y - OFFSET_Y) / (h + s) );
+
+    /* Vérification de la borne supérieure de la grille */
+    if (col > RECT_TILE_NUMBER - 1 || line > 11 )
+        return (hexagone);
+
+    lowerLimitX = OFFSET_X +(HEX_TILE_NUMBER - line - 1) * (int)(r);
+    upperLimitX = lowerLimitX + HEX_TILE_NUMBER * (2 * (int)r);
+
+    /* Vérification des bornes inférieures en prenant en compte le décalage */
+    if ( (int)(x) < lowerLimitX || (int)(x) > upperLimitX || OFFSET_Y < 0 )
+        return (hexagone);
 
     roundX = (x - OFFSET_X) - col * (2 * r);
-    roundY = (y - OFFSET_Y) - lig * (h + s);
+    roundY = (y - OFFSET_Y) - line * (h + s);
 
-    printf("TempX = %u \nTempY = %u", roundX,roundY);
-    printf("\nLigne = %d \nColonne = %d\n",lig,col);
+    rectType = line % 2;
+    /* Pris en charge du décalage d'hexagone fantome */
+    if (rectType == RECT_TYPE_A)
+        col = col - (HEX_TILE_NUMBER /2 - line/2);
+    else
+        col = col - (HEX_TILE_NUMBER /2 - line);
 
     m = ((float)h / (float)r);
-    rectType = lig % 2;
+
+
     switch (rectType)
     {
         case RECT_TYPE_A:
             /* Si on est dans la zone 2 (partie supérieure droite du rectangle) */
             if (roundY < (roundX * m - h))
-                printf("roundY = %d A2 : %f\n",roundY, m - h);
+            {
+                hexagone = coord_set(hexagone, col + 1, line - 1);
+            }
             else
             {
                 /* Si on est dans la zone 1 (partie supérieure gauche du rectangle) */
                 if (roundY < (-roundX * m + h))
-                    printf("A1\n");
+                {
+                    hexagone = coord_set(hexagone, col, line - 1);
+                }
                 /* Si on est dans la zone 1 (partie inférieure du rectangle) */
                 else
-                    printf("A3\n");
+                {
+                    hexagone = coord_set(hexagone, col, line);
+                }
             }
             break;
         case RECT_TYPE_B:
@@ -85,22 +113,32 @@ int pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsigned int 
             {
                 /* On est dans la partie supérieure */
                 if ( roundY < (2 * h - roundX * m) )
-                    printf("B2\n");
+                {
+                    hexagone = coord_set(hexagone, col, line - 1);
+                }
                 else
-                    printf("B3\n");
+                {
+                    hexagone = coord_set(hexagone, col, line);
+                }
             }
              /* On est dans la moitié gauche de l'hexagone */
             else
             {
                 if (roundY < roundX * m)
-                    printf("B2\n");
+                {
+                    hexagone = coord_set(hexagone, col, line - 1);
+                }
                 else
-                    printf("B1\n");
+                {
+                    hexagone = coord_set(hexagone, col -1, line);
+                }
+
             }
             break;
 
         default:
             break;
     }
-    return (1);
+    return (hexagone);
 }
+

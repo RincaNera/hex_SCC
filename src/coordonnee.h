@@ -49,5 +49,5 @@ unsigned int coord_get_x(Coordonnee coord);
  */
 unsigned int coord_get_y(Coordonnee coord);
 
-int pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsigned int h, unsigned int s);
+Coordonnee pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsigned int h, unsigned int s);
 #endif //HEX_SCC_COORDONNEE_H
