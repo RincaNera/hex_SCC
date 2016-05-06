@@ -43,11 +43,14 @@ unsigned int coord_get_y(Coordonnee coord) {
 }
 
 int pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsigned int h, unsigned int s){
+    #define HEX_TILE_NUMBER 11
     #define OFFSET_X 295
     #define OFFSET_Y 118
-    #define HEX_TILE_NUMBER 11
+    #define RECT_TYPE_A 0
+    #define RECT_TYPE_B 1
 
-    int col, lig, shift, roundX, roundY, rectType;
+    int col, lig, roundX, roundY, rectType;
+    float m;
 
     col = (int) ( (x - OFFSET_X) / (2 * r) );
     lig = (int) ( (y - OFFSET_Y) / (h + s) );
@@ -58,5 +61,46 @@ int pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsigned int 
     printf("TempX = %u \nTempY = %u", roundX,roundY);
     printf("\nLigne = %d \nColonne = %d\n",lig,col);
 
+    m = ((float)h / (float)r);
+    rectType = lig % 2;
+    switch (rectType)
+    {
+        case RECT_TYPE_A:
+            /* Si on est dans la zone 2 (partie supérieure droite du rectangle) */
+            if (roundY < (roundX * m - h))
+                printf("roundY = %d A2 : %f\n",roundY, m - h);
+            else
+            {
+                /* Si on est dans la zone 1 (partie supérieure gauche du rectangle) */
+                if (roundY < (-roundX * m + h))
+                    printf("A1\n");
+                /* Si on est dans la zone 1 (partie inférieure du rectangle) */
+                else
+                    printf("A3\n");
+            }
+            break;
+        case RECT_TYPE_B:
+            /* On est dans la moitié droite de l'hexagone */
+            if (roundX > r)
+            {
+                /* On est dans la partie supérieure */
+                if ( roundY < (2 * h - roundX * m) )
+                    printf("B2\n");
+                else
+                    printf("B3\n");
+            }
+             /* On est dans la moitié gauche de l'hexagone */
+            else
+            {
+                if (roundY < roundX * m)
+                    printf("B2\n");
+                else
+                    printf("B1\n");
+            }
+            break;
+
+        default:
+            break;
+    }
     return (1);
 }
