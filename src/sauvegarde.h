@@ -5,6 +5,6 @@
 
 bool save_sauvegarder(Plateau p, bool tourJ1, char* fichier);
 
-bool save_charger(Plateau* p, bool* tour, char* fichier);
+int save_charger(Plateau* p, bool* tour, char* fichier);
 
 #endif //HEX_SCC_SAUVEGARDE_H

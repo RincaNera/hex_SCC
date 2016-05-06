@@ -22,13 +22,13 @@ Coordonnee coord_set(Coordonnee coord, unsigned int x, unsigned int y) {
 }
 
 Coordonnee coord_set_x(Coordonnee coord, unsigned int x) {
-    if (x <= 11)
+    if (x <= 10)
         coord->x = x;
     return coord;
 }
 
 Coordonnee coord_set_y(Coordonnee coord, unsigned int y) {
-    if (y <= 11)
+    if (y <= 10)
         coord->y = y;
     return coord;
 }

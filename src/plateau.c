@@ -25,7 +25,18 @@ bool plateau_case_vide2(Plateau p, unsigned int x, unsigned int y) {
     return p->tab[y][x] == NULL;
 }
 
-Pion plateau_get_pion_v(Plateau p, int x, int y) {
+Pion plateau_get_pion(Plateau p, Coordonnee coord) {
+    return p->tab[coord_get_y(coord)][coord_get_x(coord)];
+}
+
+Pion plateau_get_pion_2(Plateau p, int x, int y) {
+    if (x < 0 || y < 0 || x > 10 || y > 10)
+        return NULL;
+    else
+        return p->tab[y][x];
+}
+
+Pion plateau_get_pion_neg(Plateau p, int x, int y) {
     if (x < 0 || y < 0 || x > 10 || y > 10)
         return NULL;
     else
@@ -36,17 +47,17 @@ DynTab voisin(Plateau p, Pion pion, DynTab dt) {
     Coordonnee c = pion_get_coord(pion);
     int x = coord_get_x(c), y = coord_get_y(c);
     Pion p_;
-    if ((p_ = plateau_get_pion_v(p, x - 1, y)) != NULL)if (pion_get_couleur(pion) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_neg(p, x - 1, y)) != NULL)if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x - 1, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_neg(p, x - 1, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_neg(p, x, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x, y + 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_neg(p, x + 1, y)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x + 1, y + 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_neg(p, x + 1, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_v(p, x + 1, y)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_neg(p, x, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
     return dt;
 }
@@ -87,13 +98,4 @@ int plateau_placer_pion(Plateau *p, Pion pion) {
         return 1;
     }
     return 0;
-}
-
-Pion plateau_get_pion(Plateau p, Coordonnee coord) {
-    return p->tab[coord_get_y(coord)][coord_get_x(coord)];
-}
-
-Pion plateau_get_pion2(Plateau p, unsigned int x, unsigned int y) {
-    assert(x < 11 && y < 11);
-    return p->tab[y][x];
 }

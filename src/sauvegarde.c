@@ -35,7 +35,7 @@ bool save_sauvegarder(Plateau p, bool tourJ1, char *fichier) {
     return false;
 }
 
-bool save_charger(Plateau* p, bool* tour, char *fichier) {
+int save_charger(Plateau* p, bool* tour, char *fichier) {
     FILE* file = NULL;
     char c;
     Coordonnee coord = NULL;
@@ -50,8 +50,13 @@ bool save_charger(Plateau* p, bool* tour, char *fichier) {
                 fscanf(file, "%c", &c);
                 if (c-48 != 0) {
                     pion = pion_set(pion, coord, (int)c-48);
-                    if (!plateau_placer_pion(p, pion))
+                    int res = plateau_placer_pion(p, pion);
+                    if (res == 0) {
                         fprintf(stderr, "Erreur de lecture du fichier !\n");
+                        return 0;
+                    } else if (res == 2) {
+                        return pion_get_couleur(pion)+1;
+                    }
                 }
             }
             fseek(file, 1, SEEK_CUR);
@@ -62,8 +67,8 @@ bool save_charger(Plateau* p, bool* tour, char *fichier) {
         else
             *tour = true;
         fclose(file);
-        return true;
+        return 1;
     } else
         perror("fopen()");
-    return false;
+    return 0;
 }

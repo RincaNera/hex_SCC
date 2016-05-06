@@ -17,9 +17,10 @@ OBJ_TAB   = tableau.o
 OBJ_INIT  = initialisation.o
 OBJ_IMG   = image.o
 OBJ_ITEM  = menuItem.o
+OBJ_MENU  = menu.o
 OBJ_MAIN  = main.o
 
-OBJ_COMMON = $(OBJ_COORD) $(OBJ_PION) $(OBJ_PLAT) $(OBJ_SAVE) $(OBJ_TAB) $(OBJ_INIT) $(OBJ_IMG) $(OBJ_ITEM) $(OBJ_MAIN)
+OBJ_COMMON = $(OBJ_COORD) $(OBJ_PION) $(OBJ_PLAT) $(OBJ_SAVE) $(OBJ_TAB) $(OBJ_INIT) $(OBJ_IMG) $(OBJ_MENU) $(OBJ_ITEM) $(OBJ_MAIN)
 
 all: $(OBJ_COMMON)
 	$(CC) -o $(BINDIR)/$(EXEC) $(OBJ_COMMON) $(SDL)

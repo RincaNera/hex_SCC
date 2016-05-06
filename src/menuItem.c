@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <string.h>
 #include "menuItem.h"
 
 struct menuItem_s {
@@ -6,9 +7,7 @@ struct menuItem_s {
     SDL_Surface *menuScreen;
     SDL_Rect *position;
     bool selected;
-};typedef struct menuItem_s* menuItem;
-
-
+};
 
 menuItem mnit_init() {
     menuItem mn = (menuItem)malloc(sizeof(struct menuItem_s));
@@ -26,6 +25,7 @@ menuItem mnit_init() {
 }
 
 void mnit_destroy(menuItem mn) {
+    assert(mn != NULL);
     free(mn->name);
     free(mn->position);
     free(mn);
@@ -38,7 +38,7 @@ menuItem mnit_set_name(menuItem mn, char *name) {
     return mn;
 }
 
-char *mnit_get_name(menuItem mn) {
+char* mnit_get_name(menuItem mn) {
     return mn->name;
 }
 
