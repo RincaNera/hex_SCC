@@ -1,6 +1,8 @@
 #ifndef HEX_SCC_COORDONNEE_H
 #define HEX_SCC_COORDONNEE_H
 
+#include <SDL/SDL_video.h>
+
 typedef struct coordonnee_s* Coordonnee;
 
 /**

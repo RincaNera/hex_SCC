@@ -77,4 +77,8 @@ Pion pion_set_coord2(Pion p, unsigned int x, unsigned int y);
  */
 Coordonnee pion_get_coord(Pion p);
 
+SDL_Rect pion_to_hex(Pion p);
+
+Pion hex_to_pion(int x, int y);
+
 #endif //HEX_SCC_PION_H

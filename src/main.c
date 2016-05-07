@@ -1,9 +1,10 @@
 #include <stdlib.h>
-#include "menu.h"
 #include "initialisation.h"
 #include "image.h"
 #include "main.h"
 #include "menuItem.h"
+#include "plateau.h"
+#include "sauvegarde.h"
 #include <SDL/SDL_ttf.h>
 #include <assert.h>
 
@@ -25,12 +26,10 @@
 #define REDPAWN_PNG "./files/button-red22.png"
 #define BLUEPAWN_PNG "./files/button-blue22.png"
 
-/** \brief Render de la 1ère page d'affichage le menu
- *
- * \param SDL_Surface* screen La surface SDL sur lequel afficher le menu
- * \param TTF_Font * font La police d'écriture désiré
- * \return int Un entier allant de 0 à NMENU qui retourne l'élement selectionné
- *
+/**
+ * \brief Affiche le menu
+ * \param screen La surface SDL sur lequel afficher le menu
+ * \param m La liste des items du menu
  */
 void drawMenu(menuItem* m, SDL_Surface *screen) {
     for (int i = 0; i < NMENU; ++i)
@@ -42,11 +41,33 @@ void drawMenu(menuItem* m, SDL_Surface *screen) {
         }
 }
 
-void drawPlateau(Item* items[], SDL_Surface* screen) {
-    for (int i = 0; i < N_ITEM; i++)
-        if (items[i]->on_screen)
-            apply_surface(HEXPOS_X, HEXPOS_Y, items[i]->surface, screen);
+/**
+ * \brief Affiche le plateau
+ * \param items La liste des items à afficher
+ * \param screen La surface SDL sur lequel afficher le menu
+ */
+void drawPlateau(Item* items[], SDL_Surface* screen, Plateau p) {
+    if (items[0]->on_screen) {
+    Pion pion = NULL;
+    SDL_Rect pos;
+    Coordonnee coord = coord_init();
+    for (unsigned int i = 0; i < TAILLE; i++) {
+        for (unsigned int j = 0; j < TAILLE; j++) {
+            coord_set(coord, j, i);
+             if ((pion = plateau_get_pion(p, coord)) != NULL) {
+                 pos = pion_to_hex(pion);
+                 if (pion_get_couleur(pion) == ROUGE)
+                    apply_surface(HEXPOS_X + pos.x, HEXPOS_Y + pos.y, items[2]->surface, screen);
+                 else
+                     apply_surface(HEXPOS_X + pos.x, HEXPOS_Y + pos.y, items[1]->surface, screen);
+             }
+        }
+    }
+        apply_surface(HEXPOS_X, HEXPOS_Y, items[0]->surface, screen);
+    }
 }
+
+
 
 int main(int argc, char *argv[]) {
     Uint32 time;
@@ -73,8 +94,8 @@ int main(int argc, char *argv[]) {
 
     /* Chargement des images */
     hexBoard.surface = IMG_Load(HEXFILE_PNG);
-    bluePawn.surface = load_image(BLUEPAWN_PNG);
-    redPawn.surface = load_image(REDPAWN_PNG);
+    bluePawn.surface = IMG_Load(BLUEPAWN_PNG);
+    redPawn.surface = IMG_Load(REDPAWN_PNG);
 
     /* Fond de l'écran de jeu */
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND_MENU));
@@ -88,6 +109,10 @@ int main(int argc, char *argv[]) {
         menu[i] = init_menu(menu[i], screen, font, color, menu_name[i], y);
         y += FONT_SIZE + MENU_MARGIN;
     }
+
+    Plateau p = plateau_init();
+    bool tour = true;
+    save_charger(&p, &tour, "save.txt");
 
     /* Mise à jour de l'écran */
     SDL_Flip(screen);
@@ -137,7 +162,7 @@ int main(int argc, char *argv[]) {
         }
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND_MENU));
         drawMenu(menu, screen);
-        drawPlateau(items, screen);
+        drawPlateau(items, screen, p);
         SDL_Flip(screen);
         if (1000 / FPS > (SDL_GetTicks() - time))
             SDL_Delay(1000 / FPS - (SDL_GetTicks() - time));

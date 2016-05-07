@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <assert.h>
+#include <math.h>
 #include "coordonnee.h"
 
 struct coordonnee_s {
