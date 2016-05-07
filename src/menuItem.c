@@ -3,52 +3,53 @@
 #include "menuItem.h"
 
 struct menuItem_s {
-    char *name;
-    SDL_Surface *menuScreen;
+    SDL_Surface *selected_s;
+    SDL_Surface *not_selected_s;
     SDL_Rect *position;
+    bool on_screen;
     bool selected;
 };
 
 menuItem mnit_init() {
     menuItem mn = (menuItem)malloc(sizeof(struct menuItem_s));
     assert(mn != NULL);
-    mn->name = NULL;
-    mn->menuScreen = NULL;
+    mn->selected_s = NULL;
+    mn->not_selected_s = NULL;
     mn->position = (SDL_Rect*)malloc(sizeof(SDL_Rect));
     assert(mn->position != NULL);
 	mn->position->x = 0;
 	mn->position->y = 0;
 	mn->position->h = 0;
 	mn->position->w = 0;
+    mn->on_screen = true;
     mn->selected = false;
     return mn;
 }
 
 void mnit_destroy(menuItem mn) {
     assert(mn != NULL);
-    free(mn->name);
+    SDL_FreeSurface(mn->selected_s);
+    SDL_FreeSurface(mn->not_selected_s);
     free(mn->position);
     free(mn);
 }
 
-menuItem mnit_set_name(menuItem mn, char *name) {
-    mn->name = (char*)malloc(sizeof(char)*(strlen(name)+1));
-    assert(mn->name != NULL);
-    strcpy(mn->name, name);
+menuItem mnit_set_selected_surface(menuItem mn, SDL_Surface *surface) {
+    mn->selected_s = surface;
     return mn;
 }
 
-char* mnit_get_name(menuItem mn) {
-    return mn->name;
-}
-
-menuItem mnit_set_surface(menuItem mn, SDL_Surface *surface) {
-    mn->menuScreen = surface;
+menuItem mnit_set_not_selected_surface(menuItem mn, SDL_Surface *surface) {
+    mn->not_selected_s = surface;
     return mn;
 }
 
-SDL_Surface *mnit_get_surface(menuItem mn) {
-    return mn->menuScreen;
+SDL_Surface *mnit_get_selected_surface(menuItem mn) {
+    return mn->selected_s;
+}
+
+SDL_Surface *mnit_get_not_selected_surface(menuItem mn) {
+    return mn->not_selected_s;
 }
 
 menuItem mnit_set_position(menuItem mn, SDL_Rect *position) {
@@ -65,6 +66,22 @@ menuItem mnit_set_selected(menuItem mn, bool s) {
     return mn;
 }
 
-bool mnit_get_selected(menuItem mn) {
+bool mnit_is_selected(menuItem mn) {
     return mn->selected;
+}
+
+menuItem mnit_set_on_screen(menuItem mn, bool s) {
+    mn->on_screen = s;
+    return mn;
+}
+
+bool mnit_is_on_screen(menuItem mn) {
+    return mn->on_screen;
+}
+
+bool mnit_is_over(menuItem mn, Curseur* c) {
+    if (c->x >= mn->position->x && c->x <= mn->position->x + mn->position->w && c->y >= mn->position->y && c->y <= mn->position->y + mn->position->h)
+        return true;
+    else
+        return false;
 }

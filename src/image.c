@@ -15,7 +15,8 @@ SDL_Surface* load_image( char *filepath ) {
         optimisedImage = SDL_DisplayFormat( loadedImage );
         //Supression de l'ancienne image
         SDL_FreeSurface( loadedImage );
-    }
+    } else
+        exit(4);
 
     return (optimisedImage);
 }
