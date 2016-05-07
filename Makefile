@@ -12,6 +12,7 @@ OBJDIR = obj
 OBJ_COORD = coordonnee.o
 OBJ_PION  = pion.o
 OBJ_PLAT  = plateau.o
+OBJ_JEU   = jeu.o
 OBJ_SAVE  = sauvegarde.o
 OBJ_TAB   = tableau.o
 OBJ_INIT  = initialisation.o
@@ -19,7 +20,7 @@ OBJ_IMG   = image.o
 OBJ_ITEM  = menuItem.o
 OBJ_MAIN  = main.o
 
-OBJ_COMMON = $(OBJ_COORD) $(OBJ_PION) $(OBJ_PLAT) $(OBJ_SAVE) $(OBJ_TAB) $(OBJ_INIT) $(OBJ_IMG) $(OBJ_ITEM) $(OBJ_MAIN)
+OBJ_COMMON = $(OBJ_COORD) $(OBJ_PION) $(OBJ_PLAT) $(OBJ_SAVE) $(OBJ_TAB) $(OBJ_INIT) $(OBJ_IMG) $(OBJ_ITEM) $(OBJ_MAIN) $(OBJ_JEU)
 
 all: $(OBJ_COMMON)
 	$(CC) -o $(BINDIR)/$(EXEC) $(OBJ_COMMON) $(SDL)

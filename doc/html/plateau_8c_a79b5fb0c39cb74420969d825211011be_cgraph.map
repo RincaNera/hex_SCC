@@ -1,0 +1,8 @@
+<map id="voisin" name="voisin">
+<area shape="rect" id="node2" href="$pion_8c.html#a5a3c56d9830a999d7e1fd5b28d9db60e" title="Renvoie les coordonnées d&#39;un pion. " alt="" coords="122,5,233,32"/>
+<area shape="rect" id="node3" href="$coordonnee_8c.html#acda1189deca8f2a619475190d6e2871c" title="Renvoie la valeur x d&#39;une coordonnée. " alt="" coords="131,56,224,83"/>
+<area shape="rect" id="node4" href="$coordonnee_8c.html#a7dde434d1cef0a0982ec68d179f54885" title="Renvoie la valeur y d&#39;une coordonnée. " alt="" coords="131,107,224,133"/>
+<area shape="rect" id="node5" href="$plateau_8c.html#a0fb685aca854d56bfff20c537ea6dd01" title="plateau_get_pion_v" alt="" coords="110,157,245,184"/>
+<area shape="rect" id="node6" href="$pion_8c.html#a923a0aeeb6925d024845ee9ae3383140" title="Renvoie la couleur d&#39;un pion. " alt="" coords="117,208,237,235"/>
+<area shape="rect" id="node7" href="$tableau_8c.html#a52b691f4b5311478ab1cc92afc2ebc28" title="tab_add" alt="" coords="143,259,211,285"/>
+</map>

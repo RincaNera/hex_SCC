@@ -1,0 +1,13 @@
+<map id="coup_gagnant" name="coup_gagnant">
+<area shape="rect" id="node2" href="$tableau_8c.html#aea30832b9b3ecef0e9a090b8e5820f50" title="tab_init" alt="" coords="175,5,239,32"/>
+<area shape="rect" id="node3" href="$tableau_8c.html#a52b691f4b5311478ab1cc92afc2ebc28" title="tab_add" alt="" coords="338,56,406,83"/>
+<area shape="rect" id="node4" href="$tableau_8c.html#a9d1f7a46e114383eae1407b6f3ed3ec3" title="tab_get_pion" alt="" coords="159,360,255,387"/>
+<area shape="rect" id="node5" href="$tableau_8c.html#a2e4a058dca826834f8e6face086dc4ba" title="tab_get_taille" alt="" coords="157,411,256,437"/>
+<area shape="rect" id="node6" href="$pion_8c.html#a5a3c56d9830a999d7e1fd5b28d9db60e" title="Renvoie les coordonnées d&#39;un pion. " alt="" coords="317,107,427,133"/>
+<area shape="rect" id="node7" href="$coordonnee_8c.html#acda1189deca8f2a619475190d6e2871c" title="Renvoie la valeur x d&#39;une coordonnée. " alt="" coords="325,208,419,235"/>
+<area shape="rect" id="node8" href="$coordonnee_8c.html#a7dde434d1cef0a0982ec68d179f54885" title="Renvoie la valeur y d&#39;une coordonnée. " alt="" coords="325,259,419,285"/>
+<area shape="rect" id="node9" href="$pion_8c.html#a923a0aeeb6925d024845ee9ae3383140" title="Renvoie la couleur d&#39;un pion. " alt="" coords="312,309,432,336"/>
+<area shape="rect" id="node10" href="$plateau_8c.html#a79b5fb0c39cb74420969d825211011be" title="voisin" alt="" coords="179,157,235,184"/>
+<area shape="rect" id="node12" href="$tableau_8c.html#ac7bfbe114d72a63ff2d1c2ddef8defc5" title="tab_destroy" alt="" coords="161,461,252,488"/>
+<area shape="rect" id="node11" href="$plateau_8c.html#a0fb685aca854d56bfff20c537ea6dd01" title="plateau_get_pion_v" alt="" coords="305,157,439,184"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="pion_set2" name="pion_set2">
+<area shape="rect" id="node2" href="$pion_8c.html#ae2e3bb6a24720a45cb48aec8b8a2ccbf" title="Définit la couleur d&#39;un pion. " alt="" coords="133,5,253,32"/>
+<area shape="rect" id="node3" href="$pion_8c.html#a9cda75e0ca7df210fa8dd7fe0c1df3a0" title="Modifie les coordonnées d&#39;un pion en fonction de x et y ATTENTION A LA MODIFICATION D&#39;UN PION DEJA PL..." alt="" coords="135,56,252,83"/>
+<area shape="rect" id="node4" href="$coordonnee_8c.html#aea53f0e6dd7020e1241c256c59c139a9" title="Modifie la valeur x d&#39;une coordonnée. " alt="" coords="301,31,395,57"/>
+<area shape="rect" id="node5" href="$coordonnee_8c.html#a6b00af9466a0cc03990007701474cb48" title="Modifie la valeur y d&#39;une coordonnée. " alt="" coords="301,81,395,108"/>
+</map>

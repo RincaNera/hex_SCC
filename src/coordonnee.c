@@ -23,14 +23,12 @@ Coordonnee coord_set(Coordonnee coord, unsigned int x, unsigned int y) {
 }
 
 Coordonnee coord_set_x(Coordonnee coord, unsigned int x) {
-    if (x <= 11)
-        coord->x = x;
+    coord->x = x;
     return coord;
 }
 
 Coordonnee coord_set_y(Coordonnee coord, unsigned int y) {
-    if (y <= 11)
-        coord->y = y;
+    coord->y = y;
     return coord;
 }
 
@@ -142,3 +140,18 @@ Coordonnee pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsign
     return (hexagone);
 }
 
+Coordonnee hexa_to_pixel (unsigned int col, unsigned int line, unsigned int r, unsigned int h, unsigned int s)
+{
+    Coordonnee hexaCenter;
+    int lowerLimitX;
+    unsigned int x, y;
+
+    hexaCenter = coord_init();
+    lowerLimitX = OFFSET_X +(HEX_TILE_NUMBER - line - 1) * r;
+
+    x = lowerLimitX + (2 * r) * (col + 1);
+    y = OFFSET_Y + (2 * h + s)/2 * line;
+
+    hexaCenter = coord_set(hexaCenter, x, y);
+    return hexaCenter;
+}

@@ -1,0 +1,23 @@
+<map id="save_charger" name="save_charger">
+<area shape="rect" id="node2" href="$coordonnee_8c.html#abc286d3b94f2fe1a8bfe69bbeb998f98" title="Initialise une coordonnée. " alt="" coords="362,32,441,59"/>
+<area shape="rect" id="node3" href="$coordonnee_8c.html#a6b00af9466a0cc03990007701474cb48" title="Modifie la valeur y d&#39;une coordonnée. " alt="" coords="177,32,271,59"/>
+<area shape="rect" id="node4" href="$coordonnee_8c.html#aea53f0e6dd7020e1241c256c59c139a9" title="Modifie la valeur x d&#39;une coordonnée. " alt="" coords="177,83,271,109"/>
+<area shape="rect" id="node5" href="$pion_8c.html#a46db8400d88948ebd265a8c947952d49" title="Initialise un pion. " alt="" coords="189,133,259,160"/>
+<area shape="rect" id="node6" href="$pion_8c.html#a5acc82e6ead46596a710228ed570d021" title="Définit un pion de coordonnée déjà définie. " alt="" coords="189,184,259,211"/>
+<area shape="rect" id="node9" href="$plateau_8c.html#a342655e5b31a2ede37fbaac61a8e1a22" title="Place un pion sur le plateau. " alt="" coords="155,349,293,376"/>
+<area shape="rect" id="node7" href="$pion_8c.html#ae2e3bb6a24720a45cb48aec8b8a2ccbf" title="Définit la couleur d&#39;un pion. " alt="" coords="341,133,461,160"/>
+<area shape="rect" id="node8" href="$pion_8c.html#a9c073da0b6647815c851ce28ea443142" title="Modifie les coordonnées d&#39;un pion en fonction de coordonnée déja définie ATTENTION A LA MODIFICATION ..." alt="" coords="346,184,457,211"/>
+<area shape="rect" id="node10" href="$pion_8c.html#a5a3c56d9830a999d7e1fd5b28d9db60e" title="Renvoie les coordonnées d&#39;un pion. " alt="" coords="701,843,811,869"/>
+<area shape="rect" id="node11" href="$plateau_8c.html#a2ba2bae7b3508e495941de8ffbfa4e43" title="Indique si une case du plateau est vide. " alt="" coords="509,285,640,312"/>
+<area shape="rect" id="node12" href="$coordonnee_8c.html#a7dde434d1cef0a0982ec68d179f54885" title="Renvoie la valeur y d&#39;une coordonnée. " alt="" coords="709,311,803,337"/>
+<area shape="rect" id="node13" href="$coordonnee_8c.html#acda1189deca8f2a619475190d6e2871c" title="Renvoie la valeur x d&#39;une coordonnée. " alt="" coords="709,412,803,439"/>
+<area shape="rect" id="node14" href="$plateau_8c.html#ae9ea6fe42c1b68f90ebb0f5cb5656207" title="coup_gagnant" alt="" coords="350,589,453,616"/>
+<area shape="rect" id="node15" href="$tableau_8c.html#aea30832b9b3ecef0e9a090b8e5820f50" title="tab_init" alt="" coords="543,691,607,717"/>
+<area shape="rect" id="node16" href="$tableau_8c.html#a52b691f4b5311478ab1cc92afc2ebc28" title="tab_add" alt="" coords="722,716,790,743"/>
+<area shape="rect" id="node17" href="$tableau_8c.html#a9d1f7a46e114383eae1407b6f3ed3ec3" title="tab_get_pion" alt="" coords="527,792,623,819"/>
+<area shape="rect" id="node18" href="$tableau_8c.html#a2e4a058dca826834f8e6face086dc4ba" title="tab_get_taille" alt="" coords="525,488,624,515"/>
+<area shape="rect" id="node19" href="$pion_8c.html#a923a0aeeb6925d024845ee9ae3383140" title="Renvoie la couleur d&#39;un pion. " alt="" coords="696,589,816,616"/>
+<area shape="rect" id="node20" href="$plateau_8c.html#a79b5fb0c39cb74420969d825211011be" title="voisin" alt="" coords="547,640,603,667"/>
+<area shape="rect" id="node22" href="$tableau_8c.html#ac7bfbe114d72a63ff2d1c2ddef8defc5" title="tab_destroy" alt="" coords="529,539,620,565"/>
+<area shape="rect" id="node21" href="$plateau_8c.html#a0fb685aca854d56bfff20c537ea6dd01" title="plateau_get_pion_v" alt="" coords="689,640,823,667"/>
+</map>

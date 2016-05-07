@@ -1,0 +1,5 @@
+<map id="pion_set_couleur" name="pion_set_couleur">
+<area shape="rect" id="node2" href="$pion_8h.html#a5acc82e6ead46596a710228ed570d021" title="Définit un pion de coordonnée déjà définie. " alt="" coords="178,5,249,32"/>
+<area shape="rect" id="node4" href="$pion_8h.html#a440481fe8809059cc88233522bea3d1f" title="Définit un pion en fonction de x et y. " alt="" coords="174,56,253,83"/>
+<area shape="rect" id="node3" href="$sauvegarde_8h.html#af43a299fb30f2bb60461193ba426889c" title="save_charger" alt="" coords="302,5,402,32"/>
+</map>

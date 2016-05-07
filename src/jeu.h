@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "plateau.h"
+
 
 #define RED  "\x1B[31m"
 #define GRE  "\x1B[32m"
@@ -29,5 +31,12 @@ typedef struct _player {
 	int role;
 } player;
 
+void choix_mode(player *joueur_1, player *joueur_2);
+
+void initialiser_jeu(player *J1, player *J2, Plateau* p);
+
+void gestion_joueur(player *joueur_actuel, player J1, player J2);
+
+void affichage_sommaire(Plateau p);
 
 #endif

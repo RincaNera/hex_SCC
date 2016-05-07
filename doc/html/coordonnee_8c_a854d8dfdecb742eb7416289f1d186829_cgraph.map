@@ -1,0 +1,6 @@
+<map id="hexa_to_pixel" name="hexa_to_pixel">
+<area shape="rect" id="node2" href="$coordonnee_8c.html#abc286d3b94f2fe1a8bfe69bbeb998f98" title="Initialise une coordonnée. " alt="" coords="158,5,237,32"/>
+<area shape="rect" id="node3" href="$coordonnee_8c.html#a9c8010a765b620b8d99c772bf72e4575" title="Définit une coordonnée. " alt="" coords="158,56,237,83"/>
+<area shape="rect" id="node4" href="$coordonnee_8c.html#aea53f0e6dd7020e1241c256c59c139a9" title="Modifie la valeur x d&#39;une coordonnée. " alt="" coords="285,31,379,57"/>
+<area shape="rect" id="node5" href="$coordonnee_8c.html#a6b00af9466a0cc03990007701474cb48" title="Modifie la valeur y d&#39;une coordonnée. " alt="" coords="285,81,379,108"/>
+</map>

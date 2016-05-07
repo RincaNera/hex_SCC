@@ -1,0 +1,9 @@
+<map id="affichage_sommaire" name="affichage_sommaire">
+<area shape="rect" id="node2" href="$coordonnee_8c.html#abc286d3b94f2fe1a8bfe69bbeb998f98" title="Initialise une coordonnée. " alt="" coords="213,5,291,32"/>
+<area shape="rect" id="node3" href="$coordonnee_8c.html#aea53f0e6dd7020e1241c256c59c139a9" title="Modifie la valeur x d&#39;une coordonnée. " alt="" coords="205,56,299,83"/>
+<area shape="rect" id="node4" href="$coordonnee_8c.html#a6b00af9466a0cc03990007701474cb48" title="Modifie la valeur y d&#39;une coordonnée. " alt="" coords="205,107,299,133"/>
+<area shape="rect" id="node5" href="$plateau_8c.html#af23da670e63436e0a0570ddc438d20b0" title="Renvoie le pion d&#39;une case d&#39;un plateau. " alt="" coords="192,157,312,184"/>
+<area shape="rect" id="node8" href="$pion_8c.html#a923a0aeeb6925d024845ee9ae3383140" title="Renvoie la couleur d&#39;un pion. " alt="" coords="192,208,312,235"/>
+<area shape="rect" id="node6" href="$coordonnee_8c.html#a7dde434d1cef0a0982ec68d179f54885" title="Renvoie la valeur y d&#39;une coordonnée. " alt="" coords="360,132,453,159"/>
+<area shape="rect" id="node7" href="$coordonnee_8c.html#acda1189deca8f2a619475190d6e2871c" title="Renvoie la valeur x d&#39;une coordonnée. " alt="" coords="360,183,453,209"/>
+</map>

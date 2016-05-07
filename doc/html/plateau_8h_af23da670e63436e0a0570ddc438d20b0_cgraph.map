@@ -1,0 +1,4 @@
+<map id="plateau_get_pion" name="plateau_get_pion">
+<area shape="rect" id="node2" href="$coordonnee_8c.html#a7dde434d1cef0a0982ec68d179f54885" title="Renvoie la valeur y d&#39;une coordonnée. " alt="" coords="173,5,267,32"/>
+<area shape="rect" id="node3" href="$coordonnee_8c.html#acda1189deca8f2a619475190d6e2871c" title="Renvoie la valeur x d&#39;une coordonnée. " alt="" coords="173,56,267,83"/>
+</map>

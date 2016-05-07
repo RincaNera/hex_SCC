@@ -1,0 +1,12 @@
+<map id="coord_set_x" name="coord_set_x">
+<area shape="rect" id="node2" href="$coordonnee_8h.html#a9c8010a765b620b8d99c772bf72e4575" title="Définit une coordonnée. " alt="" coords="177,56,255,83"/>
+<area shape="rect" id="node6" href="$jeu_8c.html#a9276421f9f3c5e1bb2fdf58d5b4e9b40" title="affichage_sommaire" alt="" coords="147,107,285,133"/>
+<area shape="rect" id="node8" href="$pion_8h.html#a9cda75e0ca7df210fa8dd7fe0c1df3a0" title="Modifie les coordonnées d&#39;un pion en fonction de x et y ATTENTION A LA MODIFICATION D&#39;UN PION DEJA PL..." alt="" coords="157,157,275,184"/>
+<area shape="rect" id="node10" href="$sauvegarde_8h.html#aa9bcc2d13cd9a3d5597a9dc825fd6fc9" title="save_sauvegarder" alt="" coords="152,208,280,235"/>
+<area shape="rect" id="node11" href="$sauvegarde_8h.html#af43a299fb30f2bb60461193ba426889c" title="save_charger" alt="" coords="166,259,266,285"/>
+<area shape="rect" id="node3" href="$coordonnee_8h.html#ac0c2f48084e1f0216a87166637d9aa01" title="Renvoie les coordonnées de l&#39;hexagone à partir des positions d&#39;un clic Les positions entrées sont en ..." alt="" coords="337,5,433,32"/>
+<area shape="rect" id="node5" href="$coordonnee_8h.html#a854d8dfdecb742eb7416289f1d186829" title="Renvoie les coordonées en pixels du centre d&#39;un hexagone. " alt="" coords="334,56,437,83"/>
+<area shape="rect" id="node4" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="485,31,536,57"/>
+<area shape="rect" id="node7" href="$jeu_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="360,107,411,133"/>
+<area shape="rect" id="node9" href="$pion_8h.html#a440481fe8809059cc88233522bea3d1f" title="Définit un pion en fonction de x et y. " alt="" coords="346,157,425,184"/>
+</map>

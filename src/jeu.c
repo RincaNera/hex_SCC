@@ -80,40 +80,40 @@ void affichage_sommaire(Plateau p) {
     }
 }
 
-int main(void) {
-	int fini=0;
-	int tour=JOUEUR_1;
-	player joueur_actuel;
-	player J1, J2;
-	Plateau p = NULL;
+// int jeumain(void) {
+	// int fini=0;
+	// int tour=JOUEUR_1;
+	// player joueur_actuel;
+	// player J1, J2;
+	// Plateau p = NULL;
 	
-	choix_mode(&J1, &J2);
-	initialiser_jeu(&J1, &J2, &p);
-	joueur_actuel = J1;
+	// choix_mode(&J1, &J2);
+	// initialiser_jeu(&J1, &J2, &p);
+	// joueur_actuel = J1;
 
-    affichage_sommaire(p);
+    // affichage_sommaire(p);
 	
-	do {
-	/* Tour de jeu */
-		if (joueur_actuel.role == HUMAIN) {
-			printf("J%d : %sHumain%s\n", joueur_actuel.num_joueur+1, GRE, NRM);
-		}
-		else if (joueur_actuel.role == IA) {
-			printf("J%d : %sIA%s\n", joueur_actuel.num_joueur+1, BLU, NRM);
-		}
-		else {
-			fprintf(stderr, "%s[ERR] : le joueur attendu n'est ni un Humain, ni une IA.%s\n", RED, NRM);
-			exit(ERREUR_TOUR_JEU);
-		}
+	// do {
+	// /* Tour de jeu */
+		// if (joueur_actuel.role == HUMAIN) {
+			// printf("J%d : %sHumain%s\n", joueur_actuel.num_joueur+1, GRE, NRM);
+		// }
+		// else if (joueur_actuel.role == IA) {
+			// printf("J%d : %sIA%s\n", joueur_actuel.num_joueur+1, BLU, NRM);
+		// }
+		// else {
+			// fprintf(stderr, "%s[ERR] : le joueur attendu n'est ni un Humain, ni une IA.%s\n", RED, NRM);
+			// exit(ERREUR_TOUR_JEU);
+		// }
 		
-		if (joueur_actuel.num_joueur == JOUEUR_2)
-			fini=1;
+		// if (joueur_actuel.num_joueur == JOUEUR_2)
+			// fini=1;
 		
-	/* Gestion du tour suivant */
-		gestion_joueur(&joueur_actuel, J1, J2);
+	// /* Gestion du tour suivant */
+		// gestion_joueur(&joueur_actuel, J1, J2);
 		
 		//~ joueur++;
-	} while (!fini);
+	// } while (!fini);
 	
-	return FIN_DU_JEU;
-}
+	// return FIN_DU_JEU;
+// }

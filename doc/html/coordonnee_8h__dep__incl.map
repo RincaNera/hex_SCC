@@ -1,0 +1,13 @@
+<map id="src/coordonnee.h" name="src/coordonnee.h">
+<area shape="rect" id="node2" href="$coordonnee_8c.html" title="src/coordonnee.c" alt="" coords="5,80,128,107"/>
+<area shape="rect" id="node3" href="$pion_8h.html" title="src/pion.h" alt="" coords="254,80,332,107"/>
+<area shape="rect" id="node4" href="$plateau_8h.html" title="src/plateau.h" alt="" coords="357,155,453,181"/>
+<area shape="rect" id="node5" href="$jeu_8c.html" title="src/jeu.c" alt="" coords="180,229,252,256"/>
+<area shape="rect" id="node12" href="$main_8c.html" title="src/main.c" alt="" coords="408,80,489,107"/>
+<area shape="rect" id="node9" href="$pion_8c.html" title="src/pion.c" alt="" coords="254,155,332,181"/>
+<area shape="rect" id="node10" href="$tableau_8h.html" title="src/tableau.h" alt="" coords="478,155,575,181"/>
+<area shape="rect" id="node6" href="$plateau_8c.html" title="src/plateau.c" alt="" coords="450,229,547,256"/>
+<area shape="rect" id="node7" href="$sauvegarde_8h.html" title="src/sauvegarde.h" alt="" coords="303,229,425,256"/>
+<area shape="rect" id="node8" href="$sauvegarde_8c.html" title="src/sauvegarde.c" alt="" coords="303,304,425,331"/>
+<area shape="rect" id="node11" href="$tableau_8c.html" title="src/tableau.c" alt="" coords="571,229,668,256"/>
+</map>

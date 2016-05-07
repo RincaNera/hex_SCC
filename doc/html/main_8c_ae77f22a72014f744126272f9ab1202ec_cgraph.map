@@ -1,0 +1,11 @@
+<map id="drawMenu" name="drawMenu">
+<area shape="rect" id="node2" href="$menu_item_8c.html#ae4a709457c9aba1a74261b463b2efa48" title="mnit_init" alt="" coords="165,5,235,32"/>
+<area shape="rect" id="node3" href="$menu_item_8c.html#a97bc20474c42c29822c94cd4c9380a37" title="mnit_set_name" alt="" coords="145,56,255,83"/>
+<area shape="rect" id="node4" href="$menu_item_8c.html#a4c6f0505a9f2e1f895149d2aac36708c" title="mnit_set_surface" alt="" coords="139,107,261,133"/>
+<area shape="rect" id="node5" href="$menu_item_8c.html#a660795dd83d002a4ce9a6457840519f8" title="mnit_get_name" alt="" coords="145,157,255,184"/>
+<area shape="rect" id="node6" href="$menu_item_8c.html#a03786fe49f0b5f6966bc34b7b5e6ce1f" title="mnit_get_position" alt="" coords="138,208,262,235"/>
+<area shape="rect" id="node7" href="$menu_item_8c.html#a50f473f00d2eeedeea1ddd122e005ea3" title="mnit_get_surface" alt="" coords="139,259,261,285"/>
+<area shape="rect" id="node8" href="$menu_item_8c.html#aff9224d83040bb67d37247ec4d59d855" title="mnit_get_selected" alt="" coords="136,309,264,336"/>
+<area shape="rect" id="node9" href="$menu_item_8c.html#ac515b702948a2b1a0a1ef58ebe729904" title="mnit_set_selected" alt="" coords="136,360,264,387"/>
+<area shape="rect" id="node10" href="$menu_item_8c.html#a902c65450854179f8812eafd8cb5081e" title="mnit_destroy" alt="" coords="151,411,249,437"/>
+</map>

@@ -1,0 +1,14 @@
+<map id="main" name="main">
+<area shape="rect" id="node2" href="$jeu_8c.html#aa7859b8012c95efe68e17a5ae5bd0297" title="choix_mode" alt="" coords="127,31,219,57"/>
+<area shape="rect" id="node3" href="$jeu_8c.html#a07dafe86650a02aa82acf5ae359ed5d6" title="initialiser_jeu" alt="" coords="125,81,222,108"/>
+<area shape="rect" id="node5" href="$jeu_8c.html#a9276421f9f3c5e1bb2fdf58d5b4e9b40" title="affichage_sommaire" alt="" coords="104,132,243,159"/>
+<area shape="rect" id="node13" href="$jeu_8c.html#a1b722608f4eab9571988206f02b5d950" title="gestion_joueur" alt="" coords="120,183,227,209"/>
+<area shape="rect" id="node4" href="$plateau_8c.html#a69983a913ed2db3f730e0d7f8865facf" title="Initialise un plateau. " alt="" coords="307,5,395,32"/>
+<area shape="rect" id="node6" href="$coordonnee_8c.html#abc286d3b94f2fe1a8bfe69bbeb998f98" title="Initialise une coordonnée. " alt="" coords="311,56,390,83"/>
+<area shape="rect" id="node7" href="$coordonnee_8c.html#aea53f0e6dd7020e1241c256c59c139a9" title="Modifie la valeur x d&#39;une coordonnée. " alt="" coords="304,107,397,133"/>
+<area shape="rect" id="node8" href="$coordonnee_8c.html#a6b00af9466a0cc03990007701474cb48" title="Modifie la valeur y d&#39;une coordonnée. " alt="" coords="304,157,397,184"/>
+<area shape="rect" id="node9" href="$plateau_8c.html#af23da670e63436e0a0570ddc438d20b0" title="Renvoie le pion d&#39;une case d&#39;un plateau. " alt="" coords="291,208,411,235"/>
+<area shape="rect" id="node12" href="$pion_8c.html#a923a0aeeb6925d024845ee9ae3383140" title="Renvoie la couleur d&#39;un pion. " alt="" coords="291,259,411,285"/>
+<area shape="rect" id="node10" href="$coordonnee_8c.html#a7dde434d1cef0a0982ec68d179f54885" title="Renvoie la valeur y d&#39;une coordonnée. " alt="" coords="459,183,552,209"/>
+<area shape="rect" id="node11" href="$coordonnee_8c.html#acda1189deca8f2a619475190d6e2871c" title="Renvoie la valeur x d&#39;une coordonnée. " alt="" coords="459,233,552,260"/>
+</map>

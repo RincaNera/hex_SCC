@@ -1,0 +1,6 @@
+<map id="src/plateau.h" name="src/plateau.h">
+<area shape="rect" id="node2" href="$jeu_8c.html" title="src/jeu.c" alt="" coords="5,80,77,107"/>
+<area shape="rect" id="node3" href="$plateau_8c.html" title="src/plateau.c" alt="" coords="102,80,199,107"/>
+<area shape="rect" id="node4" href="$sauvegarde_8h.html" title="src/sauvegarde.h" alt="" coords="224,80,347,107"/>
+<area shape="rect" id="node5" href="$sauvegarde_8c.html" title="src/sauvegarde.c" alt="" coords="224,155,347,181"/>
+</map>

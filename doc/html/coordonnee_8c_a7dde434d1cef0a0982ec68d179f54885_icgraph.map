@@ -1,0 +1,12 @@
+<map id="coord_get_y" name="coord_get_y">
+<area shape="rect" id="node2" href="$main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title="main" alt="" coords="181,5,232,32"/>
+<area shape="rect" id="node3" href="$plateau_8h.html#a2ba2bae7b3508e495941de8ffbfa4e43" title="Indique si une case du plateau est vide. " alt="" coords="319,56,449,83"/>
+<area shape="rect" id="node4" href="$plateau_8h.html#a342655e5b31a2ede37fbaac61a8e1a22" title="Place un pion sur le plateau. " alt="" coords="502,107,639,133"/>
+<area shape="rect" id="node6" href="$plateau_8c.html#a79b5fb0c39cb74420969d825211011be" title="voisin" alt="" coords="179,157,235,184"/>
+<area shape="rect" id="node7" href="$plateau_8c.html#ae9ea6fe42c1b68f90ebb0f5cb5656207" title="coup_gagnant" alt="" coords="333,157,435,184"/>
+<area shape="rect" id="node8" href="$plateau_8h.html#af23da670e63436e0a0570ddc438d20b0" title="Renvoie le pion d&#39;une case d&#39;un plateau. " alt="" coords="147,259,267,285"/>
+<area shape="rect" id="node5" href="$sauvegarde_8h.html#af43a299fb30f2bb60461193ba426889c" title="save_charger" alt="" coords="689,107,789,133"/>
+<area shape="rect" id="node9" href="$jeu_8c.html#a9276421f9f3c5e1bb2fdf58d5b4e9b40" title="affichage_sommaire" alt="" coords="315,233,453,260"/>
+<area shape="rect" id="node11" href="$sauvegarde_8h.html#aa9bcc2d13cd9a3d5597a9dc825fd6fc9" title="save_sauvegarder" alt="" coords="320,284,448,311"/>
+<area shape="rect" id="node10" href="$jeu_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="545,233,596,260"/>
+</map>
