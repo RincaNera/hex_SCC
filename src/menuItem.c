@@ -6,7 +6,6 @@ struct menuItem_s {
     SDL_Surface *selected_s;
     SDL_Surface *not_selected_s;
     SDL_Rect *position;
-    bool on_screen;
     bool selected;
 };
 
@@ -21,7 +20,6 @@ menuItem mnit_init() {
 	mn->position->y = 0;
 	mn->position->h = 0;
 	mn->position->w = 0;
-    mn->on_screen = true;
     mn->selected = false;
     return mn;
 }
@@ -68,15 +66,6 @@ menuItem mnit_set_selected(menuItem mn, bool s) {
 
 bool mnit_is_selected(menuItem mn) {
     return mn->selected;
-}
-
-menuItem mnit_set_on_screen(menuItem mn, bool s) {
-    mn->on_screen = s;
-    return mn;
-}
-
-bool mnit_is_on_screen(menuItem mn) {
-    return mn->on_screen;
 }
 
 bool mnit_is_over(menuItem mn, Curseur* c) {

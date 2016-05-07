@@ -2,7 +2,6 @@
 #define HEX_SCC_MENUITEM_H
 
 #include <stdbool.h>
-#include "SDL/SDL.h"
 #include "main.h"
 
 typedef struct menuItem_s* menuItem;
@@ -22,9 +21,6 @@ SDL_Rect* mnit_get_position(menuItem mn);
 
 menuItem mnit_set_selected(menuItem mn, bool s);
 bool mnit_is_selected(menuItem mn);
-
-menuItem mnit_set_on_screen(menuItem mn, bool s);
-bool mnit_is_on_screen(menuItem mn);
 
 bool mnit_is_over(menuItem mn, Curseur* c);
 

@@ -56,8 +56,6 @@ Coordonnee pion_get_coord(Pion p) {
     return p->coord;
 }
 
-
-// TODO
 SDL_Rect pion_to_hex(Pion p) {
     SDL_Rect pos;
     int c = coord_get_x(pion_get_coord(p)), l = coord_get_y(pion_get_coord(p)), r = 15;

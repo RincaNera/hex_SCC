@@ -1,8 +1,5 @@
 #include "initialisation.h"
 
-#include <SDL/SDL_ttf.h>
-#include <stdbool.h>
-
 static bool initialize_screen(SDL_Surface **screen) {
     // INITIALISATION ET TEST
     if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
@@ -38,7 +35,7 @@ void initialize(SDL_Surface **screen) {
     }
 }
 
-menuItem init_menu(menuItem item, SDL_Surface *screen, TTF_Font* font, SDL_Color color[], char* name, int y) {
+static menuItem init_item(menuItem item, SDL_Surface *screen, TTF_Font* font, SDL_Color color[], char* name, int y) {
     item = mnit_init();
     item = mnit_set_not_selected_surface(item, TTF_RenderText_Blended(font, name, color[0]));
     item = mnit_set_selected_surface(item, TTF_RenderText_Blended(font, name, color[1]));
@@ -46,4 +43,12 @@ menuItem init_menu(menuItem item, SDL_Surface *screen, TTF_Font* font, SDL_Color
     mnit_get_position(item)->y = y;
     item = mnit_set_selected(item, false);
     return item;
+}
+
+void init_menu(Menu menu, SDL_Surface *screen, TTF_Font* font, SDL_Color color[], int size, int margin) {
+    int y = screen->clip_rect.h / 2 - ((int)((float)menu->size / 2.0f * (float)size)) - margin;
+    for (int i = 0; i < menu->size; i++) {
+        menu->items[i] = init_item(menu->items[i], screen, font, color, menu->names[i], y);
+        y += size + margin;
+    }
 }
