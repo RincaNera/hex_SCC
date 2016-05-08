@@ -23,12 +23,14 @@ Coordonnee coord_set(Coordonnee coord, unsigned int x, unsigned int y) {
 }
 
 Coordonnee coord_set_x(Coordonnee coord, unsigned int x) {
-    coord->x = x;
+    if (x <= 11)
+        coord->x = x;
     return coord;
 }
 
 Coordonnee coord_set_y(Coordonnee coord, unsigned int y) {
-    coord->y = y;
+    if (y <= 11)
+        coord->y = y;
     return coord;
 }
 
@@ -40,6 +42,11 @@ unsigned int coord_get_y(Coordonnee coord) {
     return coord->y;
 }
 
+void coord_destroy(Coordonnee *coord) {
+    free(*coord);
+    *coord = NULL;
+}
+
 Coordonnee pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsigned int h, unsigned int s){
     #define HEX_TILE_NUMBER 11 /* Nombre de case en largeur / longueur */
     #define RECT_TILE_NUMBER HEX_TILE_NUMBER + (HEX_TILE_NUMBER / 2)
@@ -49,7 +56,7 @@ Coordonnee pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsign
     #define RECT_TYPE_B 1 /* Rectangle de type Y (i grec)*/
 
     Coordonnee hexagone; /* Coordonnées de l'hexagone sélectionné */
-    unsigned int col, line, rectType; /* Colonne, linene correspondant à un rectangle et son type */
+    unsigned int col, line, rectType; /* Colonne, ligne correspondant à un rectangle et son type */
     int roundX, roundY; /* Points X, Y centré sur le point 0.0 du rectangle */
     float m; /* Coefficient directeur */
     int lowerLimitX, upperLimitX; /* Borne inférieure et supérieure de la grille en pixel */
@@ -140,18 +147,19 @@ Coordonnee pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsign
     return (hexagone);
 }
 
-Coordonnee hexa_to_pixel (unsigned int col, unsigned int line, unsigned int r, unsigned int h, unsigned int s)
+SDL_Rect hexa_to_pixel (unsigned int col, unsigned int line, unsigned int r, unsigned int h, unsigned int s)
 {
-    Coordonnee hexaCenter;
+    SDL_Rect hexaCenter;
     int lowerLimitX;
     unsigned int x, y;
 
-    hexaCenter = coord_init();
     lowerLimitX = OFFSET_X +(HEX_TILE_NUMBER - line - 1) * r;
 
     x = lowerLimitX + (2 * r) * (col + 1);
     y = OFFSET_Y + (2 * h + s)/2 * line;
 
-    hexaCenter = coord_set(hexaCenter, x, y);
+    hexaCenter.x = x;
+	hexaCenter.y = y;
+
     return hexaCenter;
 }

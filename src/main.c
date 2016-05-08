@@ -9,6 +9,7 @@
 #include "jeu.h"
 #include "plateau.h"
 #include <stdio.h>
+#include "menu.h"
 
 
 #define R 15
@@ -31,23 +32,26 @@
 int main( int argc, char *argv[ ] )
 {
 	Uint32 time;
+	/*Ecran */
     SDL_Surface *screen = NULL;
     SDL_Surface *hexBoard = NULL;
     SDL_Surface *bluePawn = NULL;
     SDL_Surface *redPawn = NULL;
     unsigned int mouseX, mouseY;
 	TTF_Font *font;
+	/* Variables */
 	int running;
 	int i;
 	int joueur = 0;
-    Coordonnee hexagon, hexagonCenter;
+    Coordonnee hexagon;
+	SDL_Rect hexagonCenter;
     hexagon = coord_init();
-    hexagonCenter = coord_init();
     int winner = 0;
 	int turn = JOUEUR_1;
 	player joueur_actuel;
 	player J1, J2;
 	Plateau p = NULL;
+    int gameType;
 
 	initialiser_jeu(&J1, &J2, &p);
 	joueur_actuel = J1;
@@ -67,7 +71,11 @@ int main( int argc, char *argv[ ] )
     font = TTF_OpenFont(FONT_NAME,FONT_SIZE);
     running = true;
     i = drawMenu(screen, font);
-    if(i==1)
+    if (i == PLAY)
+    {
+        i = drawMenuGameType(screen, font);
+    }
+    if(i == QUIT)
     {
         running = false;
     }
@@ -111,7 +119,7 @@ int main( int argc, char *argv[ ] )
                         SDL_SaveBMP(screen,HEXFILE_BMP);
                         SDL_UnlockSurface(screen);
                         i = drawMenu(screen, font);
-                        if(i==1)
+                        if(i == QUIT)
                             running = false;
                         hexBoard = load_image(HEXFILE_BMP);
                         apply_surface(0,0,hexBoard,screen);

@@ -1,6 +1,9 @@
 #ifndef HEX_SCC_COORDONNEE_H
 #define HEX_SCC_COORDONNEE_H
 
+#include <SDL/SDL_video.h>
+#include "SDL/SDL.h"
+
 typedef struct coordonnee_s* Coordonnee;
 
 /**
@@ -9,6 +12,8 @@ typedef struct coordonnee_s* Coordonnee;
  *         (0, 0) par défaut
  */
 Coordonnee coord_init();
+
+void coord_destroy(Coordonnee* coord);
 
 /**
  * \brief Définit une coordonnée
@@ -51,7 +56,7 @@ unsigned int coord_get_y(Coordonnee coord);
 
 /**
  * \brief Renvoie les coordonnées de l'hexagone à partir des positions d'un clic
- * Les positions entrées sont en pixel et la sortie se fait par rapport à la grille
+ * Les positions entrées sont en pixels et la sortie se fait par rapport à la grille
  * Exemple:
  * - X: 412 Y: 124 -> 0,0 (dehors)
  * - X: 520 Y: 236 -> 4,4
@@ -66,7 +71,7 @@ unsigned int coord_get_y(Coordonnee coord);
 Coordonnee pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsigned int h, unsigned int s);
 
 /**
- * \brief Renvoie les coordonées en pixels du centre d'un hexagone
+ * \brief Convertit une ligne et une colonne d'un hexagone en un rectangle avec les coordonées (x,y) en pixels du centre d'un hexagone
  * \param unsigned int col Colonne de l'hexagone
  * \param unsigned int line Ordonnée de l'hexagone
  * \param unsigned int r Moitié de la largeur d'un hexagone
@@ -74,5 +79,5 @@ Coordonnee pixel_to_rect (unsigned int x, unsigned int y, unsigned int r, unsign
  * \param unsigned int s Longueur d'un côté
  * \return Les coordonnées en x,y du centre de l'hexagone
  */
-Coordonnee hexa_to_pixel (unsigned int col, unsigned int line, unsigned int r, unsigned int h, unsigned int s);
+SDL_Rect hexa_to_pixel (unsigned int col, unsigned int line, unsigned int r, unsigned int h, unsigned int s);
 #endif //HEX_SCC_COORDONNEE_H
