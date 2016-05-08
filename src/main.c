@@ -23,8 +23,10 @@ int main(int argc, char *argv[]) {
     bool running = true;
 
     unsigned int r = 15;
-    unsigned int s = (unsigned int) ((double) r / cos(30 * M_PI / 180.0f));
-    unsigned int h = (unsigned int) ((sin(30 * M_PI / 180.0f)) * (double) s);
+    unsigned int s = (unsigned int) ((double) r / cos(30 * M_PI / 180.0f))+1;
+    unsigned int h = (unsigned int) ((sin(30 * M_PI / 180.0f)) * (double) s)-1;
+
+    printf("%d %d %d\n", r, h, s);
 
     /* Initialise la SDL */
     initialize(&screen);
@@ -143,15 +145,16 @@ int main(int argc, char *argv[]) {
                             break;
                         }
                         if (game) {
-                            if (curseur.x >= HEXPOS_X && curseur.x <= hexBoard.surface->clip_rect.w
-                                && curseur.y >= HEXPOS_Y && curseur.y <= hexBoard.surface->clip_rect.h) {
+                            if (curseur.x >= HEXPOS_X && curseur.x <= HEXPOS_X + hexBoard.surface->clip_rect.w
+                                && curseur.y >= HEXPOS_Y && curseur.y <= HEXPOS_Y + hexBoard.surface->clip_rect.h) {
                                 Coordonnee coord = pixel_to_coord(p, HEXPOS_X+25, HEXPOS_Y+18, (unsigned int) curseur.x,
                                                                   (unsigned int) curseur.y, r, h, s);
+                                printf("clic\n");
                                 if (coord != NULL) {
-                                    printf("colonne : %d, ligne %d\n", coord_get_x(coord), coord_get_y(coord));
                                     Pion pion = pion_init();
                                     pion = pion_set(pion, coord, tourJ1);
                                     int res = plateau_placer_pion(&p, pion);
+                                    printf("%d\n", res);
                                     switch (res) {
                                         case 0:
                                             SDL_BlitSurface(miss_click.surface, NULL, screen, &miss_click_pos);
