@@ -10,7 +10,9 @@
 #define N_DIFFICULTY 2 /* Nombre d'items du choix de difficulté */
 #define N_LOAD 7
 #define N_MENU 5 /* Nombre de menu */
+#define N_FONT 3
 #define N_ITEM 3 /* Nombre de SDL_Surface */
+#define N_MESSAGE 5
 #define BACKGROUND_MENU 0,188,255 /* Couleur du fond d'écran */
 #define MENU_MARGIN 15
 #define TEXT_SELECTED 255,255,255 /* Couleur du texte lorsqu'il est selectionné */

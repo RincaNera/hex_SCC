@@ -3,8 +3,8 @@
 
 #include "coordonnee.h"
 
-#define ROUGE 1
-#define BLEU 2
+#define ROUGE 0
+#define BLEU 1
 
 typedef struct pion_s* Pion;
 
@@ -78,9 +78,5 @@ Pion pion_set_coord2(Pion p, unsigned int x, unsigned int y);
  * \return Les coordonnées du pion
  */
 Coordonnee pion_get_coord(Pion p);
-
-SDL_Rect pion_to_hex(Pion p);
-
-Pion hex_to_pion(int x, int y);
 
 #endif //HEX_SCC_PION_H

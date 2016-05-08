@@ -1,7 +1,13 @@
 #include <stdlib.h>
 #include <assert.h>
+#define __USE_MISC 1
+#include <math.h>
 #include "plateau.h"
 #include "tableau.h"
+
+#define RECT_TILE_NUMBER TAILLE + (TAILLE / 2)
+#define RECT_TYPE_A 0 /* Rectangle de type "Maison" */
+#define RECT_TYPE_B 1 /* Rectangle de type Y (i grec)*/
 
 struct plateau_s {
     Pion tab[TAILLE][TAILLE];
@@ -47,7 +53,7 @@ DynTab voisin(Plateau p, Pion pion, DynTab dt) {
     Coordonnee c = pion_get_coord(pion);
     int x = coord_get_x(c), y = coord_get_y(c);
     Pion p_;
-    if ((p_ = plateau_get_pion_neg(p, x - 1, y)) != NULL)if (pion_get_couleur(pion) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_neg(p, x - 1, y)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
     if ((p_ = plateau_get_pion_neg(p, x - 1, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
@@ -98,6 +104,91 @@ int plateau_placer_pion(Plateau *p, Pion pion) {
         return 1;
     }
     return 0;
+}
+
+Coordonnee pixel_to_coord(Plateau p, unsigned int offset_x, unsigned int offset_y, unsigned int x, unsigned int y,
+                         unsigned int r, unsigned int h, unsigned int s) {
+    Coordonnee hexagone;                /* Coordonnées de l'hexagone sélectionné */
+    unsigned int col, line, rectType;   /* Colonne, ligne correspondant à un rectangle et son type */
+    int roundX, roundY;                 /* Points X, Y centré sur le point 0.0 du rectangle */
+    float m;                            /* Coefficient directeur */
+    int lowerLimitX, upperLimitX;       /* Borne inférieure et supérieure de la grille en pixel */
+
+    col = (int) ((x - offset_x) / (2 * r));
+    line = (int) ((y - offset_y) / (h + s));
+
+    /* Vérification de la borne supérieure de la grille */
+    if (col > RECT_TILE_NUMBER - 1 || line > RECT_TILE_NUMBER - 1)
+        return NULL;
+
+    lowerLimitX = offset_x + (TAILLE - line - 1) * (int) (r);
+    upperLimitX = lowerLimitX + TAILLE * (2 * (int) r);
+
+    /* Vérification des bornes inférieures en prenant en compte le décalage */
+    if ((int) (x) < lowerLimitX || (int) (x) > upperLimitX || offset_y < 0)
+        return NULL;
+
+    hexagone = coord_init();
+
+    roundX = (x - offset_x) - col * (2 * r);
+    roundY = (y - offset_y) - line * (h + s);
+
+    rectType = line % 2;
+    /* Pris en charge du décalage d'hexagone fantome */
+    if (rectType == RECT_TYPE_A)
+        col = col - (TAILLE / 2 - line / 2);
+    else
+        col = col - (TAILLE / 2 - line);
+
+    m = ((float) h / (float) r);
+
+
+    switch (rectType) {
+        case RECT_TYPE_A:
+            /* Si on est dans la zone 2 (partie supérieure droite du rectangle) */
+            if (roundY < (roundX * m - h))
+                hexagone = coord_set(hexagone, col + 1, line - 1);
+            else {
+                /* Si on est dans la zone 1 (partie supérieure gauche du rectangle) */
+                if (roundY < (-roundX * m + h))
+                    hexagone = coord_set(hexagone, col, line - 1);
+                    /* Si on est dans la zone 1 (partie inférieure du rectangle) */
+                else
+                    hexagone = coord_set(hexagone, col, line);
+            }
+            break;
+        case RECT_TYPE_B:
+            /* On est dans la moitié droite de l'hexagone */
+            if (roundX > r) {
+                /* On est dans la partie supérieure */
+                if (roundY < (2 * h - roundX * m))
+                    hexagone = coord_set(hexagone, col, line - 1);
+                else
+                    hexagone = coord_set(hexagone, col, line);
+            }
+                /* On est dans la moitié gauche de l'hexagone */
+            else {
+                if (roundY < roundX * m)
+                    hexagone = coord_set(hexagone, col, line - 1);
+                else
+                    hexagone = coord_set(hexagone, col - 1, line);
+            }
+            break;
+
+        default:
+            break;
+    }
+    return hexagone;
+}
+
+SDL_Rect pion_to_pixel(Pion p) {
+    SDL_Rect pos;
+    int c = coord_get_x(pion_get_coord(p)), l = coord_get_y(pion_get_coord(p)), r = 15;
+    int s = (int)((double)r / cos(30* M_PI / 180.0f));
+    int h = (int)((sin(30* M_PI / 180.0f)) * (double)s);
+    pos.x = (c + (10-l) / 2) * 2 * r + ((10-l) % 2?2:1) *r + r;
+    pos.y = l * (h + s) + h + s / 2 + s/2;
+    return pos;
 }
 
 void plateau_destroy(Plateau *p) {

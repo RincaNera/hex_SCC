@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "pion.h"
+#include "plateau.h"
+
 #define __USE_MISC 1
 #include <math.h>
 
@@ -54,21 +56,6 @@ Pion pion_set_coord2(Pion p, unsigned int x, unsigned int y) {
 
 Coordonnee pion_get_coord(Pion p) {
     return p->coord;
-}
-
-SDL_Rect pion_to_hex(Pion p) {
-    SDL_Rect pos;
-    int c = coord_get_x(pion_get_coord(p)), l = coord_get_y(pion_get_coord(p)), r = 15;
-    int s = (int)((double)r / cos(30* M_PI / 180.0f));
-    int h = (int)((sin(30* M_PI / 180.0f)) * (double)s);
-    pos.x = (c + (10-l) / 2) * 2 * r + ((10-l) % 2?2:1) *r + r;
-    pos.y = l * (h + s) + h + s / 2 + s/2;
-    return pos;
-}
-
-// TODO
-Pion hex_to_pion(int x, int y) {
-    return NULL;
 }
 
 void pion_destroy(Pion *pion) {

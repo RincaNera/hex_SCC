@@ -61,4 +61,9 @@ Pion plateau_get_pion(Plateau p, Coordonnee coord);
  */
 Pion plateau_get_pion2(Plateau p, unsigned int x, unsigned int y);
 
+SDL_Rect pion_to_pixel(Pion p);
+
+Coordonnee pixel_to_coord(Plateau p, unsigned int offset_x, unsigned int offset_y, unsigned int x, unsigned int y,
+                   unsigned int r, unsigned int h, unsigned int s);
+
 #endif //HEX_SCC_PLATEAU_H

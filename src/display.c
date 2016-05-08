@@ -27,7 +27,7 @@ void drawPlateau(Item *items[], SDL_Surface *screen, Plateau p) {
             for (unsigned int j = 0; j < TAILLE; j++) {
                 coord_set(coord, j, i);
                 if ((pion = plateau_get_pion(p, coord)) != NULL) {
-                    pos = pion_to_hex(pion);
+                    pos = pion_to_pixel(pion);
                     if (pion_get_couleur(pion) == ROUGE)
                         apply_surface(HEXPOS_X + pos.x, HEXPOS_Y + pos.y, items[2]->surface, screen);
                     else
