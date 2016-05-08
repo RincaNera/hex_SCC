@@ -134,17 +134,12 @@ Coordonnee pixel_to_coord(Plateau p, unsigned int offset_x, unsigned int offset_
     roundY = (y - offset_y) - line * (h + s);
 
     rectType = line % 2;
-    /* Pris en charge du décalage d'hexagone fantome */
-    if (rectType == RECT_TYPE_A)
-        col = col - (TAILLE / 2 - line / 2);
-    else
-        col = col - (TAILLE / 2 - line);
 
     m = ((float) h / (float) r);
 
-
     switch (rectType) {
         case RECT_TYPE_A:
+            col = col - ((TAILLE - line) / 2);
             /* Si on est dans la zone 2 (partie supérieure droite du rectangle) */
             if (roundY < (roundX * m - h))
                 hexagone = coord_set(hexagone, col + 1, line - 1);
@@ -158,6 +153,7 @@ Coordonnee pixel_to_coord(Plateau p, unsigned int offset_x, unsigned int offset_
             }
             break;
         case RECT_TYPE_B:
+            col = col - ((TAILLE - line) / 2) + 1;
             /* On est dans la moitié droite de l'hexagone */
             if (roundX > r) {
                 /* On est dans la partie supérieure */
@@ -174,7 +170,6 @@ Coordonnee pixel_to_coord(Plateau p, unsigned int offset_x, unsigned int offset_
                     hexagone = coord_set(hexagone, col - 1, line);
             }
             break;
-
         default:
             break;
     }
