@@ -96,7 +96,6 @@ int main(int argc, char *argv[]) {
     while (running) {
         time = SDL_GetTicks();
         if (message_on_screen) {
-            printf("fin_message\n");
             if (time > (message_time + 5000)) {
                 message_on_screen = false;
                 for (int i = 0; i < N_MESSAGE; i++)
@@ -146,12 +145,12 @@ int main(int argc, char *argv[]) {
                         if (game) {
                             if (curseur.x >= HEXPOS_X && curseur.x <= hexBoard.surface->clip_rect.w
                                 && curseur.y >= HEXPOS_Y && curseur.y <= hexBoard.surface->clip_rect.h) {
-                                Coordonnee coord = pixel_to_coord(p, HEXPOS_X, HEXPOS_Y, (unsigned int) curseur.x,
+                                Coordonnee coord = pixel_to_coord(p, HEXPOS_X+25, HEXPOS_Y+18, (unsigned int) curseur.x,
                                                                   (unsigned int) curseur.y, r, h, s);
                                 if (coord != NULL) {
                                     printf("colonne : %d, ligne %d\n", coord_get_x(coord), coord_get_y(coord));
                                     Pion pion = pion_init();
-                                    pion = pion_set2(pion, coord_get_x(coord)-1, coord_get_y(coord)-1, tourJ1);
+                                    pion = pion_set(pion, coord, tourJ1);
                                     int res = plateau_placer_pion(&p, pion);
                                     switch (res) {
                                         case 0:
