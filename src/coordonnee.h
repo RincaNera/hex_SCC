@@ -12,6 +12,8 @@ typedef struct coordonnee_s* Coordonnee;
  */
 Coordonnee coord_init();
 
+void coord_destroy(Coordonnee* coord);
+
 /**
  * \brief Définit une coordonnée
  * \param coord La coordonnée à définir

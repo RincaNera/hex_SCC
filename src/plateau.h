@@ -15,6 +15,8 @@ typedef struct plateau_s* Plateau;
  */
 Plateau plateau_init();
 
+void plateau_destroy(Plateau* p);
+
 /**
  * \brief Indique si une case du plateau est vide
  * \param p Un plateau de jeu

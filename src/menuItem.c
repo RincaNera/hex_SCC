@@ -25,11 +25,12 @@ menuItem mnit_init() {
 }
 
 void mnit_destroy(menuItem mn) {
-    assert(mn != NULL);
+    if(mn != NULL) {
     SDL_FreeSurface(mn->selected_s);
     SDL_FreeSurface(mn->not_selected_s);
     free(mn->position);
     free(mn);
+    }
 }
 
 menuItem mnit_set_selected_surface(menuItem mn, SDL_Surface *surface) {

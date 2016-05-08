@@ -70,3 +70,9 @@ SDL_Rect pion_to_hex(Pion p) {
 Pion hex_to_pion(int x, int y) {
     return NULL;
 }
+
+void pion_destroy(Pion *pion) {
+    coord_destroy(&(*pion)->coord);
+    free(*pion);
+    *pion = NULL;
+}

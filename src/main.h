@@ -8,7 +8,8 @@
 #define N_GAMEMENU 2 /* Nombre d'items du menu de jeu */
 #define N_NEWGAMEMENU 2 /* Nombre d'items du menu de nouvelle partie */
 #define N_DIFFICULTY 2 /* Nombre d'items du choix de difficulté */
-#define N_MENU 4 /* Nombre de menu */
+#define N_LOAD 7
+#define N_MENU 5 /* Nombre de menu */
 #define N_ITEM 3 /* Nombre de SDL_Surface */
 #define BACKGROUND_MENU 0,188,255 /* Couleur du fond d'écran */
 #define MENU_MARGIN 15
@@ -23,6 +24,10 @@
 #define HEXFILE_PNG "./files/hex_inverse.png"
 #define REDPAWN_PNG "./files/button-red22.png"
 #define BLUEPAWN_PNG "./files/button-blue22.png"
+#define PREVIOUS_NS_PNG "./files/previous.png"
+#define PREVIOUS_S_PNG "./files/previous_selected.png"
+#define TITLE "HEX"
+#define TITLE_COLOR 200,0,0
 
 typedef struct curseur_s {
     int x;

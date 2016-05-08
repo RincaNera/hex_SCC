@@ -1,5 +1,8 @@
+#define __USE_MISC 1
+
 #include <stdbool.h>
 #include <stdio.h>
+#include <dirent.h>
 #include "sauvegarde.h"
 
 bool save_sauvegarder(Plateau p, bool tourJ1, char *fichier) {
@@ -71,4 +74,27 @@ int save_charger(Plateau* p, bool* tour, char *fichier) {
     } else
         perror("fopen()");
     return 0;
+}
+
+char** save_page(DIR ** dir, int page) {
+    if (*dir == NULL)
+        if((*dir = opendir("./saves")) == NULL) {
+            fprintf(stderr, "ERROR: Folder files doesn't exist\n");
+            exit(5);
+        }
+    char** names = (char**)malloc(sizeof(char*)*5);
+    int i = 0;
+    struct dirent* dirent;
+    seekdir(dir, page*5);
+    while(i < 5) {
+        if ((dirent = readdir(*dir)) == NULL) {
+            names[i] = (char*)malloc(sizeof(char)*(strlen("Aucun fichier")+1));
+            strcpy(names[i++], "Aucun fichier");
+        } else {
+        names[i] = (char*)malloc(sizeof(char)*(strlen(dirent->d_name)+1));
+        strcpy(names[i++], dirent->d_name);
+        }
+    }
+    closedir(*dir);
+    return names;
 }

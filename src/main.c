@@ -1,7 +1,6 @@
 #include "initialisation.h"
 #include "image.h"
 #include "display.h"
-#include "sauvegarde.h"
 
 int main(int argc, char *argv[]) {
     Uint32 time;
@@ -9,7 +8,8 @@ int main(int argc, char *argv[]) {
     Item hexBoard, bluePawn, redPawn;
     TTF_Font *font;
     Curseur curseur;
-    int menu_on_screen = 0;
+    int page = 0;
+    int jeu = 1;
     Menu menu[N_MENU];
     bool running = true;
 
@@ -22,6 +22,14 @@ int main(int argc, char *argv[]) {
 
     /* Charge la police d'écriture */
     font = TTF_OpenFont(FONT_NAME, FONT_SIZE);
+    TTF_Font *title_font = TTF_OpenFont(FONT_NAME, FONT_SIZE +15);
+
+    /* Titre du jeu */
+    SDL_Color title_color = {TITLE_COLOR};
+    SDL_Surface* title = TTF_RenderText_Blended(title_font, TITLE, title_color);
+    SDL_Rect title_pos;
+    title_pos.x = screen->clip_rect.w / 2 - title->clip_rect.w / 2;
+    title_pos.y = 15;
 
     /* Item */
     Item *items[N_ITEM] = {&hexBoard, &bluePawn, &redPawn};
@@ -36,55 +44,28 @@ int main(int argc, char *argv[]) {
     /* Fond de l'écran de jeu */
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND_MENU));
 
-    /* Menu principal */
-    menuItem play = NULL, quit = NULL, options = NULL;
-    Menu main_menu = menu_init(N_MAINMENU);
-    main_menu->items[0] = play;
-    main_menu->items[1] = options;
-    main_menu->items[2] = quit;
-    char *aux_n[5] = {"Jouer", "Options", "Quitter"};
-    main_menu = menu_set_names(main_menu, aux_n);
-    main_menu->on_screen = true;
-    init_menu(main_menu, screen, font, color, FONT_SIZE, MENU_MARGIN);
+    menuItem previous = mnit_init();
+    mnit_set_not_selected_surface(previous, IMG_Load(PREVIOUS_NS_PNG));
+    mnit_set_selected_surface(previous, IMG_Load(PREVIOUS_S_PNG));
+    mnit_get_position(previous)->x = 150;
+    mnit_get_position(previous)->y = screen->clip_rect.h / 2 - mnit_get_selected_surface(previous)->clip_rect.h/2;
 
-    /* Menu Jeu */
-    menuItem new_game = NULL, load_game = NULL;
-    Menu game_menu = menu_init(N_GAMEMENU);
-    game_menu->items[0] = new_game;
-    game_menu->items[1] = load_game;
-    aux_n[0] = "Nouvelle partie";
-    aux_n[1] = "Charger partie";
-    game_menu = menu_set_names(game_menu, aux_n);
-    init_menu(game_menu, screen, font, color, FONT_SIZE, MENU_MARGIN);
-
-    /* Menu Nouvelle partie */
-    menuItem human = NULL, ai = NULL;
-    Menu new_game_menu = menu_init(N_NEWGAMEMENU);
-    new_game_menu->items[0] = human;
-    new_game_menu->items[1] = ai;
-    aux_n[0] = "vs HUMAIN";
-    aux_n[1] = "vs ORDINATEUR";
-    new_game_menu = menu_set_names(new_game_menu, aux_n);
-    init_menu(new_game_menu, screen, font, color, FONT_SIZE, MENU_MARGIN);
-
-    /* Menu Difficulté */
-    menuItem aiv1 = NULL, aiv2 = NULL;
-    Menu diff_menu = menu_init(N_DIFFICULTY);
-    diff_menu->items[0] = aiv1;
-    diff_menu->items[1] = aiv2;
-    aux_n[0] = "IA v1";
-    aux_n[1] = "IA v2";
-    diff_menu = menu_set_names(diff_menu, aux_n);
-    init_menu(diff_menu, screen, font, color, FONT_SIZE, MENU_MARGIN);
+    Menu main_menu = menu_init(N_MAINMENU), game_menu = menu_init(N_GAMEMENU),
+            new_game_menu = menu_init(N_NEWGAMEMENU), diff_menu = menu_init(N_DIFFICULTY),
+            load_menu = menu_init(N_LOAD-2);
 
     menu[0] = main_menu;
     menu[1] = game_menu;
     menu[2] = new_game_menu;
     menu[3] = diff_menu;
+    menu[4] = load_menu;
 
-    Plateau p = plateau_init();
-    bool tour = true;
-    save_charger(&p, &tour, "save.txt");
+    menu_set(menu);
+    for (int i = 0; i < N_MENU-1; i++)
+        init_menu(menu[i], screen, font, color, FONT_SIZE, MENU_MARGIN);
+
+    Plateau p = NULL;
+    bool tourJ1 = true;
 
     /* Mise à jour de l'écran */
     SDL_Flip(screen);
@@ -97,6 +78,7 @@ int main(int argc, char *argv[]) {
             curseur.y = event.motion.y;
             switch (event.type) {
                 case SDL_MOUSEMOTION:
+                    mnit_set_selected(previous, mnit_is_over(previous, &curseur));
                     for (int j = 0; j < N_MENU; j++) {
                         if (menu[j]->on_screen)
                             for (int i = 0; i < menu[j]->size; ++i)
@@ -108,58 +90,27 @@ int main(int argc, char *argv[]) {
                         running = false;
                     break;
                 case SDL_MOUSEBUTTONDOWN:
-                    if (event.button.button == SDL_BUTTON_LEFT)
-                        for (int j = 0; j < N_MENU; j++) {
-                            if (menu[j]->on_screen)
-                                for (int i = 0; i < menu[j]->size; ++i) {
-                                    if (mnit_is_over(menu[j]->items[i], &curseur)) {
-                                        switch (j) {
-                                            case 0:
-                                                switch (i) {
-                                                    case 0:
-                                                        menu[0]->on_screen = false;
-                                                        menu[1]->on_screen = true;
-                                                        break;
-                                                    case N_MAINMENU - 1:
-                                                        running = false;
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
-                                                break;
-                                            case 1:
-                                                switch(i) {
-                                                    case 0:
-                                                        menu[1]->on_screen = false;
-                                                        menu[2]->on_screen = true;
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
-                                                break;
-                                            case 2:
-                                                switch (i) {
-                                                    case 0:
-                                                        menu[2]->on_screen = false;
-                                                        break;
-                                                    case 1:
-                                                        menu[2]->on_screen = false;
-                                                        menu[3]->on_screen = true;
-                                                    default:
-                                                        break;
-                                                }
-                                                break;
-                                            case 3:
-                                                break;
-                                            case 4:
-                                                break;
-                                            default:
-                                                break;
-                                        }
-                                        break;
-                                    }
-                                }
+                    if (event.button.button == SDL_BUTTON_LEFT) {
+                        if (mnit_is_over(previous, &curseur)) {
+                            if (page > 0 && page < 4) {
+                                menu[page--]->on_screen = false;
+                                menu[page]->on_screen = true;
+                                break;
+                            } if (page == 4) {
+                                menu[page]->on_screen = false;
+                                page = 2;
+                                menu[page]->on_screen = true;
+                            }
                         }
+                        jeu = menu_clic(screen, menu, &page, curseur, &p, &tourJ1, items, font, color);
+                        if (jeu == 0)
+                            running = false;
+                        else if (jeu == 2) {
+                            move_menu(screen, menu, true);
+                            mnit_get_position(previous)->x = 80;
+                            mnit_get_position(previous)->y = 20;
+                        }
+                    }
                     break;
                 case SDL_QUIT:
                     running = false;
@@ -169,7 +120,8 @@ int main(int argc, char *argv[]) {
             }
         }
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, BACKGROUND_MENU));
-        drawMenu(menu, N_MENU, screen);
+        SDL_BlitSurface(title, NULL, screen, &title_pos);
+        drawMenu(menu, N_MENU, screen, previous);
         drawPlateau(items, screen, p);
         SDL_Flip(screen);
         if (1000 / FPS > (SDL_GetTicks() - time))
@@ -177,10 +129,13 @@ int main(int argc, char *argv[]) {
     }
 
     //Quit SDL
+    plateau_destroy(&p);
     for (int i = 0; i < N_ITEM; i++)
         SDL_FreeSurface(items[i]->surface);
     for (int i = 0; i < N_MENU; i++)
         menu_destroy(menu[i]);
+    SDL_FreeSurface(title);
+    TTF_CloseFont(title_font);
     TTF_CloseFont(font);
     TTF_Quit();
     SDL_Quit();

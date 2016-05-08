@@ -99,3 +99,14 @@ int plateau_placer_pion(Plateau *p, Pion pion) {
     }
     return 0;
 }
+
+void plateau_destroy(Plateau *p) {
+    if (*p != NULL) {
+        for (int i = 0; i < TAILLE; i++)
+            for (int j = 0; j < TAILLE; j++)
+                if ((*p)->tab[i][j] != NULL)
+                    pion_destroy(&(*p)->tab[i][j]);
+        free(*p);
+        *p = NULL;
+    }
+}

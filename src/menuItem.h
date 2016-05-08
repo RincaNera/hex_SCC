@@ -15,7 +15,6 @@ SDL_Surface *mnit_get_selected_surface(menuItem mn);
 menuItem mnit_set_not_selected_surface(menuItem mn, SDL_Surface *surface);
 SDL_Surface *mnit_get_not_selected_surface(menuItem mn);
 
-
 menuItem mnit_set_position(menuItem mn, SDL_Rect *position);
 SDL_Rect* mnit_get_position(menuItem mn);
 

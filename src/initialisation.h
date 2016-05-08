@@ -9,7 +9,6 @@
 #define SCREEN_WIDTH 800 /* Largeur de la fenêtre d'affichage */
 #define SCREEN_HEIGHT 600 /* Hauteur de la fenêtre d'affichage */
 #define SCREEN_BPP 32 /* Bit-Per-Pixel profondeur des couleurs */
-#define TITRE "HEX"
 
 /**
  * \brief Initialise la SDL

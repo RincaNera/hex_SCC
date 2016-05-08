@@ -10,7 +10,7 @@
  * \param screen La surface SDL sur lequel afficher le menu
  * \param m La liste des items du menu
  */
-void drawMenu(Menu* m, int nb_menu, SDL_Surface *screen);
+void drawMenu(Menu* m, int nb_menu, SDL_Surface *screen, menuItem previous);
 
 /**
  * \brief Affiche le plateau

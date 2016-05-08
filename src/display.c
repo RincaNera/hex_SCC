@@ -1,7 +1,11 @@
 #include "display.h"
 #include "image.h"
 
-void drawMenu(Menu *m, int nb_menu, SDL_Surface *screen) {
+void drawMenu(Menu *m, int nb_menu, SDL_Surface *screen, menuItem previous) {
+    if (mnit_is_selected(previous))
+        SDL_BlitSurface(mnit_get_selected_surface(previous), NULL, screen, mnit_get_position(previous));
+    else
+        SDL_BlitSurface(mnit_get_not_selected_surface(previous), NULL, screen, mnit_get_position(previous));
     for (int j = 0; j < nb_menu; j++) {
         if (m[j]->on_screen)
             for (int i = 0; i < m[j]->size; ++i)

@@ -14,6 +14,8 @@ typedef struct pion_s* Pion;
  */
 Pion pion_init();
 
+void pion_destroy(Pion* pion);
+
 /**
  * \brief Définit un pion de coordonnée déjà définie
  * \param p Le pion à définir

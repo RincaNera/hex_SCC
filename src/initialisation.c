@@ -12,7 +12,7 @@ static bool initialize_screen(SDL_Surface **screen) {
         return false;
 
     // TITRE DE LA FENÊTRE
-    SDL_WM_SetCaption(TITRE, NULL);
+    SDL_WM_SetCaption(TITLE, NULL);
 
     return true;
 }

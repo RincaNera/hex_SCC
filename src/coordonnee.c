@@ -41,3 +41,8 @@ unsigned int coord_get_x(Coordonnee coord) {
 unsigned int coord_get_y(Coordonnee coord) {
     return coord->y;
 }
+
+void coord_destroy(Coordonnee *coord) {
+    free(*coord);
+    *coord = NULL;
+}
