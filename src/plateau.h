@@ -59,7 +59,7 @@ Pion plateau_get_pion(Plateau p, Coordonnee coord);
  * \return Le pion aux coordonnées voulues ou NULL si aucun
  *         pion n'est présent a ces coordonnées
  */
-Pion plateau_get_pion2(Plateau p, unsigned int x, unsigned int y);
+Pion plateau_get_pion2(Plateau p, int x, int y);
 
 SDL_Rect pion_to_pixel(Pion p);
 

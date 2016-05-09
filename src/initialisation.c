@@ -35,7 +35,7 @@ void initialize(SDL_Surface **screen) {
     }
 }
 
-static menuItem init_item(menuItem item, SDL_Surface *screen, TTF_Font* font, SDL_Color color[], char* name, int y) {
+menuItem init_item(menuItem item, SDL_Surface *screen, TTF_Font* font, SDL_Color color[], char* name, int y) {
     item = mnit_init();
     item = mnit_set_not_selected_surface(item, TTF_RenderText_Blended(font, name, color[0]));
     item = mnit_set_selected_surface(item, TTF_RenderText_Blended(font, name, color[1]));

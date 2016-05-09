@@ -2,8 +2,10 @@
 #define HEX_SCC_MAIN_H
 
 #include <SDL/SDL_video.h>
-#include "menuItem.h"
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 #define N_MAINMENU 3 /* Nombre d'items du menu principal */
 #define N_GAMEMENU 2 /* Nombre d'items du menu de jeu */
 #define N_NEWGAMEMENU 2 /* Nombre d'items du menu de nouvelle partie */
@@ -12,7 +14,7 @@
 #define N_MENU 5 /* Nombre de menu */
 #define N_FONT 3
 #define N_ITEM 3 /* Nombre de SDL_Surface */
-#define N_MESSAGE 5
+#define N_MESSAGE 7
 #define BACKGROUND_MENU 0,188,255 /* Couleur du fond d'écran */
 #define MENU_MARGIN 15
 #define TEXT_SELECTED 255,255,255 /* Couleur du texte lorsqu'il est selectionné */

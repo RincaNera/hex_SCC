@@ -19,4 +19,8 @@ void drawMenu(Menu* m, int nb_menu, SDL_Surface *screen, menuItem previous);
  */
 void drawPlateau(Item* items[], SDL_Surface* screen, Plateau p);
 
+void drawMessage(Item** message, SDL_Rect** message_pos, SDL_Surface* screen);
+
+void drawTitle(Item* title, SDL_Rect* title_pos, SDL_Surface* screen);
+
 #endif //HEX_SCC_DISPLAY_H

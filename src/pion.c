@@ -59,7 +59,9 @@ Coordonnee pion_get_coord(Pion p) {
 }
 
 void pion_destroy(Pion *pion) {
-    coord_destroy(&(*pion)->coord);
-    free(*pion);
-    *pion = NULL;
+    if (*pion != NULL) {
+        coord_destroy(&(*pion)->coord);
+        free(*pion);
+        *pion = NULL;
+    }
 }

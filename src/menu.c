@@ -1,7 +1,6 @@
 #include "menu.h"
-#include "jeu.h"
 #include "sauvegarde.h"
-#include "initialisation.h"
+#include "jeu.h"
 
 Menu menu_init(int size) {
     Menu m = (Menu) malloc(sizeof(struct menu_s));
@@ -57,11 +56,10 @@ void menu_set(Menu *menu) {
     aux_n[1] = "IA v2";
     menu[3] = menu_set_names(menu[3], aux_n);
 
-    /* Menu de chargement */
-    for (int i = 0; i < N_LOAD - 2; i++) {
-        menu[4]->items[i] = NULL;
-        aux_n[i] = "\0";
-    }
+    /* Menu de sauvegarde */
+	menuItem save = NULL;
+	menu[4]->items[0] = save;
+	aux_n[0] = "Sauvegarder";
     menu[4] = menu_set_names(menu[4], aux_n);
 }
 
@@ -83,6 +81,9 @@ void move_menu(SDL_Surface *screen, Menu *menu, bool corner) {
                 y += mnit_get_selected_surface(menu[i]->items[j])->h;
             }
         }
+	    menu[4]->on_screen = true;
+	    mnit_get_position(menu[4]->items[0])->x = MENU_MARGIN;
+	    mnit_get_position(menu[4]->items[0])->y = 600 - FONT_SIZE - MENU_MARGIN;
     } else {
         for (int i = 0; i < N_MENU - 1; i++) {
             for (int j = 0; j < menu[i]->size; j++) {
@@ -105,8 +106,7 @@ void new_game(Plateau *p) {
     }
 }
 
-int menu_clic(SDL_Surface *screen, Menu *menu, int *page, Curseur c, Plateau *p, bool *tourJ1, Item *items[],
-              TTF_Font *font, SDL_Color *color) {
+int menu_clic(SDL_Surface *screen, Menu *menu, int *page, Curseur c, Plateau *p, bool *tourJ1, Item *items[], TTF_Font *font, SDL_Color *color, Item** message, bool* game, int* mode) {
     for (int i = 0; i < menu[*page]->size; i++) {
         if (mnit_is_over(menu[*page]->items[i], &c)) {
             switch (*page) {
@@ -131,14 +131,19 @@ int menu_clic(SDL_Surface *screen, Menu *menu, int *page, Curseur c, Plateau *p,
                             *page = 2;
                             return 1;
                         case 1:
-                            menu[0]->on_screen = true;
-                            menu[1]->on_screen = false;
-                            *page = 0;
-                            //new_game(p);
-                            //DIR* dir = NULL;
-                            //char** names = save_page(&dir, 0);
-                            //menu_set_names(menu[4], names);
-                            //init_menu(menu[4], screen, font, color, FONT_SIZE, MENU_MARGIN);
+                            new_game(p);
+                            int res = save_charger(p, tourJ1, "./saves/save.txt", mode);
+                            if (res != 0) {
+                                menu[0]->on_screen = true;
+                                menu[1]->on_screen = false;
+                                res_placer_pion(*p, res-1, tourJ1, message, game, NULL, *mode);
+                                *page = 0;
+                                if (res >= 2) {
+                                    afficher_message(message, res+1);
+                                    *game = false;
+                                } else
+                                    *game = true;
+                            }
                             return 1;
                         default:
                             break;
@@ -147,6 +152,8 @@ int menu_clic(SDL_Surface *screen, Menu *menu, int *page, Curseur c, Plateau *p,
                 case 2:
                     switch (i) {
                         case 0:
+                            *game = true;
+                            *tourJ1 = true;
                             menu[0]->on_screen = true;
                             menu[2]->on_screen = false;
                             *page = 0;
@@ -164,11 +171,14 @@ int menu_clic(SDL_Surface *screen, Menu *menu, int *page, Curseur c, Plateau *p,
                     }
                     break;
                 case 3:
+                    *game = true;
+                    *tourJ1 = true;
                     switch (i) {
                         case 0:
                             menu[0]->on_screen = true;
                             menu[3]->on_screen = false;
                             *page = 0;
+                            *mode = 1;
                             for (i = 0; i < N_ITEM; i++)
                                 items[i]->on_screen = true;
                             new_game(p);
@@ -177,6 +187,7 @@ int menu_clic(SDL_Surface *screen, Menu *menu, int *page, Curseur c, Plateau *p,
                             menu[0]->on_screen = true;
                             menu[3]->on_screen = false;
                             *page = 0;
+                            *mode = 2;
                             for (i = 0; i < N_ITEM; i++)
                                 items[i]->on_screen = true;
                             new_game(p);
@@ -185,14 +196,11 @@ int menu_clic(SDL_Surface *screen, Menu *menu, int *page, Curseur c, Plateau *p,
                             break;
                     }
                     break;
-                case 4:
-                    break;
                 default:
                     break;
             }
             break;
         }
     }
-
     return true;
 }

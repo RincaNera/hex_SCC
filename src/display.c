@@ -38,3 +38,13 @@ void drawPlateau(Item *items[], SDL_Surface *screen, Plateau p) {
         apply_surface(HEXPOS_X, HEXPOS_Y, items[0]->surface, screen);
     }
 }
+
+void drawMessage(Item **message, SDL_Rect **message_pos, SDL_Surface *screen) {
+    for (int i = 0; i < N_MESSAGE; i++)
+        if (message[i] != NULL && message[i]->on_screen)
+            SDL_BlitSurface(message[i]->surface, NULL, screen, message_pos[i]);
+}
+
+void drawTitle(Item *title, SDL_Rect *title_pos, SDL_Surface *screen) {
+    SDL_BlitSurface(title->surface, NULL, screen, title_pos);
+}

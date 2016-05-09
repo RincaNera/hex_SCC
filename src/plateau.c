@@ -1,9 +1,12 @@
 #include <stdlib.h>
 #include <assert.h>
-#define __USE_MISC 1
 #include <math.h>
 #include "plateau.h"
 #include "tableau.h"
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 #define RECT_TILE_NUMBER TAILLE + (TAILLE / 2)
 #define RECT_TYPE_A 0 /* Rectangle de type "Maison" */
@@ -35,7 +38,7 @@ Pion plateau_get_pion(Plateau p, Coordonnee coord) {
     return p->tab[coord_get_y(coord)][coord_get_x(coord)];
 }
 
-Pion plateau_get_pion_2(Plateau p, int x, int y) {
+Pion plateau_get_pion2(Plateau p, int x, int y) {
     if (x < 0 || y < 0 || x > 10 || y > 10)
         return NULL;
     else
@@ -47,6 +50,15 @@ Pion plateau_get_pion_neg(Plateau p, int x, int y) {
         return NULL;
     else
         return p->tab[y][x];
+}
+
+static void afficher_voisin(DynTab dt) {
+    printf("Voisin\n");
+    for (unsigned int i = 0; i < tab_get_taille(dt); i++) {
+        Pion p = tab_get_pion(dt, i);
+        printf("x: %d y: %d\n", coord_get_x(pion_get_coord(p)), coord_get_y(pion_get_coord(p)));
+    }
+    printf("\n");
 }
 
 DynTab voisin(Plateau p, Pion pion, DynTab dt) {
@@ -61,9 +73,9 @@ DynTab voisin(Plateau p, Pion pion, DynTab dt) {
         tab_add(dt, p_);
     if ((p_ = plateau_get_pion_neg(p, x + 1, y)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_neg(p, x + 1, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_neg(p, x + 1, y + 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
-    if ((p_ = plateau_get_pion_neg(p, x, y - 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
+    if ((p_ = plateau_get_pion_neg(p, x, y + 1)) != NULL) if (pion_get_couleur(pion) == pion_get_couleur(p_))
         tab_add(dt, p_);
     return dt;
 }

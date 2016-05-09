@@ -4,12 +4,8 @@
 #include "plateau.h"
 #include "dirent.h"
 
-bool save_sauvegarder(Plateau p, bool tourJ1, char* fichier);
+bool save_sauvegarder(Plateau p, bool tourJ1, char* fichier, int mode);
 
-char** save_page(DIR ** dir, int page);
-
-char* save_file(struct dirent* dir, int page, int n);
-
-int save_charger(Plateau* p, bool* tour, char* fichier);
+int save_charger(Plateau* p, bool* tour, char* fichier, int* mode);
 
 #endif //HEX_SCC_SAUVEGARDE_H

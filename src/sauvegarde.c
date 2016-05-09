@@ -5,7 +5,7 @@
 #include <dirent.h>
 #include "sauvegarde.h"
 
-bool save_sauvegarder(Plateau p, bool tourJ1, char *fichier) {
+bool save_sauvegarder(Plateau p, bool tourJ1, char *fichier, int mode) {
     FILE* file = NULL;
     if ((file = fopen(fichier, "w")) != NULL) {
         Coordonnee coord;
@@ -31,6 +31,7 @@ bool save_sauvegarder(Plateau p, bool tourJ1, char *fichier) {
             fprintf(file, "%d", 0);
         else
             fprintf(file, "%d", 1);
+        fprintf(file, "%d", mode);
         fclose(file);
         return true;
     } else
@@ -38,7 +39,7 @@ bool save_sauvegarder(Plateau p, bool tourJ1, char *fichier) {
     return false;
 }
 
-int save_charger(Plateau* p, bool* tour, char *fichier) {
+int save_charger(Plateau* p, bool* tour, char *fichier, int* mode) {
     FILE* file = NULL;
     char c;
     Coordonnee coord = NULL;
@@ -52,14 +53,13 @@ int save_charger(Plateau* p, bool* tour, char *fichier) {
                 pion = pion_init();
                 fscanf(file, "%c", &c);
                 if (c-48 != 0) {
-                    pion = pion_set(pion, coord, (int)c-48);
+                    pion = pion_set(pion, coord, (int)c-49);
                     int res = plateau_placer_pion(p, pion);
                     if (res == 0) {
                         fprintf(stderr, "Erreur de lecture du fichier !\n");
                         return 0;
-                    } else if (res == 2) {
-                        return pion_get_couleur(pion)+1;
-                    }
+                    } else if (res == 2)
+                        return pion_get_couleur(pion)+2;
                 }
             }
             fseek(file, 1, SEEK_CUR);
@@ -70,31 +70,10 @@ int save_charger(Plateau* p, bool* tour, char *fichier) {
         else
             *tour = true;
         fclose(file);
+        fscanf(file, "%c", &c);
+        *mode = c - 48;
         return 1;
     } else
         perror("fopen()");
     return 0;
-}
-
-char** save_page(DIR ** dir, int page) {
-    if (*dir == NULL)
-        if((*dir = opendir("./saves")) == NULL) {
-            fprintf(stderr, "ERROR: Folder files doesn't exist\n");
-            exit(5);
-        }
-    char** names = (char**)malloc(sizeof(char*)*5);
-    int i = 0;
-    struct dirent* dirent;
-    seekdir(dir, page*5);
-    while(i < 5) {
-        if ((dirent = readdir(*dir)) == NULL) {
-            names[i] = (char*)malloc(sizeof(char)*(strlen("Aucun fichier")+1));
-            strcpy(names[i++], "Aucun fichier");
-        } else {
-        names[i] = (char*)malloc(sizeof(char)*(strlen(dirent->d_name)+1));
-        strcpy(names[i++], dirent->d_name);
-        }
-    }
-    closedir(*dir);
-    return names;
 }

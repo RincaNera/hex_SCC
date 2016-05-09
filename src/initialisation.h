@@ -15,6 +15,8 @@
  */
 void initialize(SDL_Surface **screen);
 
+menuItem init_item(menuItem item, SDL_Surface *screen, TTF_Font* font, SDL_Color color[], char* name, int y);
+
 void init_menu(Menu menu, SDL_Surface *screen, TTF_Font* font, SDL_Color color[], int size, int margin);
 
 #endif
